@@ -1,11 +1,8 @@
-// Update with your config settings.
-
-//running migration
-//npx knex migrate:latest --knexfile .\src\config\knex\knexfile.js --env postgresql
-//npx knex migrate:latest --knexfile .\src\config\knex\knexfile.js --env sqlite
-
-//INFO cheatsheet!!!
-//https://devhints.io/knex
+//npx knex  --knexfile .\src\config\knex\knexfile.js --env postgresql
+//npx knex  --knexfile .\src\config\knex\knexfile.js --env postgresql migrate:make create_benutzer_table
+//npx knex  --knexfile .\src\config\knex\knexfile.js --env postgresql migrate:latest
+//npx knex  --knexfile .\src\config\knex\knexfile.js --env postgresql seed:make 00_forum_data
+//npx knex  --knexfile .\src\config\knex\knexfile.js --env postgresql seed:run
 
 module.exports = {
     //   development: {
@@ -20,9 +17,9 @@ module.exports = {
         connection: {
             host: "192.168.2.148",
             port: 5432,
-            database: "forum_db", //TODO!!!!!!!!!
-            user: "root", //TODO!!!!!!!!!
-            password: "ForumLTMF20postgreSQL14", //TODO!!!!!!!!!
+            database: "forum_db", //TODO!!!!!!!!!.env
+            user: "root", //TODO!!!!!!!!!.env
+            password: "ForumLTMF20postgreSQL14", //TODO!!!!!!!!!.env
         },
         pool: {
             min: 2,
