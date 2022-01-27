@@ -5,6 +5,7 @@ import express from "express"
 import errorController from "./config/express/middleware/errorController"
 import { checkToken } from "./config/express/middleware/auth"
 import forumRoutes from "./controller/routes/forumRoutes"
+import benutzerRoutes from "./controller/routes/benutzerRoutes"
 
 const { port } = process.env
 
@@ -16,7 +17,8 @@ server.listen(port, () => {
 server.use(cors({ allowedHeaders: "Content-Type", credentials: true, origin: true }))
 server.use(express.json())
 server.use(cookieParser())
-server.use("/forums", forumRoutes)
+server.use("/foren", forumRoutes)
+server.use("/benutzer", benutzerRoutes)
 server.use(errorController)
 
 //DB Routes

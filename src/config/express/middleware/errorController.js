@@ -10,7 +10,7 @@ function errorController(err, req, res, next) {
     }
     tryHandleUnknown(err, res)
 
-    return res.status(500).send({ error: "ERROCONTROLLER LAST RESORT 500" })
+    return res.status(500).send({ error: err.message || "ERROCONTROLLER LAST RESORT 500" })
 }
 
 function handleDuplicateKeyError(err, res) {

@@ -1,28 +1,28 @@
-//TODO copy of forum
-
-function makeRolle(e) {
-    //TODO
-    console.log("MAKEROLLE TODO", e)
+function isValidMail(email) {
+    return email
+        .toLowerCase()
+        .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )
 }
 
-export default function makeForum(forum) {
-    console.log("FORUM", forum)
-    const { idForum = 0, idParentForum = 1, name = "", rollen = [], ersteller, createdAt, updatedAt } = forum
+export default function makeBenutzer(benutzer) {
+    const { idBenutzer, idStudiengang, vorname = "", nachname = "", passwort = "", email = "", bildPfad = "", statusAktiv = 1 } = benutzer
 
-    if (!idParentForum) {
-        throw new Error("idParentForum is missing")
+    if (!passwort) {
+        throw new Error("Passwort is missing")
     }
-    if (!name) {
-        throw new Error("Forum name is missing")
+    if (!email) {
+        throw new Error("E-Mail is missing")
     }
-    if (name.length < 5) {
-        throw new Error("Forum name must be longer than 5 chars")
-    }
-    if (!ersteller) {
-        throw new Error("Forum Ersteller is missing")
-    }
-    //TODO rollen
-    const validRollen = rollen ? rollen.map((rolle) => makeRolle(rolle)) : []
 
-    return { idForum, idParentForum, name, rollen: validRollen, ersteller }
+    if (!isValidMail(email)) {
+        throw new Error("E-Mail validation error, please enter a correct E-Mail")
+    }
+
+    if (statusAktiv !== 1 && statusAktiv !== 0) {
+        throw new Error("statusAktiv needs to be 0 or 1")
+    }
+
+    return { idBenutzer, idStudiengang, vorname, nachname, passwort, email, bildPfad, statusAktiv }
 }
