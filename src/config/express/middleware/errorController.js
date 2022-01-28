@@ -2,7 +2,8 @@ function errorController(err, req, res, next) {
     console.log("this is the error middleware!")
     console.log(err.name, err.code, err.message)
 
-    if (err.code && err.code == 11000) {
+    //hande PostgreSQL Duplicate Key Error
+    if (err.code && err.code == 23505) {
         return handleDuplicateKeyError(err, res)
     }
     if (err.name == "ValidationError") {
@@ -10,15 +11,16 @@ function errorController(err, req, res, next) {
     }
     tryHandleUnknown(err, res)
 
-    return res.status(500).send({ error: err.message || "ERROCONTROLLER LAST RESORT 500" })
+    const code = err.custom ? err.code : 500
+
+    return res.status(code).send({ error: err.message || "ERROCONTROLLER LAST RESORT 500" })
 }
 
 function handleDuplicateKeyError(err, res) {
     const errCode = 409 //Conflict
-    const field = Object.keys(err.keyValue)
-    const message = `An account with that ${field} already exists.`
-    console.log({ messages: message, fields: field })
-    res.status(errCode).send({ error: "Duplicate Key Error: " + message, messages: [message], fields: [field] })
+    const message = err.detail || "detail missing; ERROR !!!"
+    // console.log({ messages: message, fields: field })
+    res.status(errCode).send({ error: "Duplicate Key Error: " + message }) //, messages: [], fields: []
 }
 
 function handleValidationError(err, res) {

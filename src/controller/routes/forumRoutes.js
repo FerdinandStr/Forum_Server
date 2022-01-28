@@ -9,7 +9,7 @@ router.post("/", function postForum(req, res, next) {
     const { name, idParentForum, rollen, ersteller } = req.body
     createForum({ name, idParentForum, rollen, ersteller })
         .then((result) => {
-            console.log("commited", result)
+            console.log("forum commited", result)
             return res.status(201).send()
         })
         .catch(next)
@@ -19,7 +19,7 @@ router.get("/", function getForumsByQuery(req, res, next) {
     const { idParentForum } = req.query
     listChildForums({ idParentForum })
         .then((result) => {
-            return res.status(200).send(result)
+            return res.status(200).json(result)
         })
         .catch(next)
 })

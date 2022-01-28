@@ -1,28 +1,44 @@
 import { Router } from "express"
 import createBenutzer from "../../use-cases/benutzer/createBenutzer"
-import getBenutzerById from "../../use-cases/benutzer/getBenutzerById"
+import deleteBenutzer from "../../use-cases/benutzer/deleteBenutzerById"
+import getBenutzer from "../../use-cases/benutzer/getBenutzer"
+import listBenutzer from "../../use-cases/benutzer/listBenutzer"
 
 const router = Router()
 
-router.post("/", async function postBenutzer(req, res, next) {
+router.post("/register", function postBenutzer(req, res, next) {
     const { idStudiengang, vorname, nachname, passwort, email } = req.body
 
     createBenutzer({ idStudiengang, vorname, nachname, passwort, email })
-        .then((result) => {
-            console.log("User created", result)
+        .then(() => {
             return res.status(201).send()
         })
         .catch(next)
 })
-
-router.get("/:idBenutzer", async function getUsersById(req, res, next) {
+// get all Users
+router.get("/all", function getUserList(req, res, next) {
     const idBenutzer = req.params.idBenutzer
-    getBenutzerById(idBenutzer)
+    listBenutzer(idBenutzer)
+        .then((benutzerList) => {
+            return res.status(200).json(benutzerList)
+        })
+        .catch(next)
+})
+// get User by Id
+router.get("/:idBenutzer", function getUsersById(req, res, next) {
+    const idBenutzer = req.params.idBenutzer
+    getBenutzer(idBenutzer)
         .then((benutzer) => {
-            if (benutzer) {
-                return res.send(benutzer)
-            }
-            return next(new Error("Kein Benutzer für id " + idBenutzer + " gefunden!"))
+            return res.status(200).json(benutzer)
+        })
+        .catch(next)
+})
+// delete User by Id
+router.delete("/:idBenutzer", (req, res, next) => {
+    const idBenutzer = req.params.idBenutzer
+    deleteBenutzer(idBenutzer)
+        .then(() => {
+            return res.status(200).send()
         })
         .catch(next)
 })

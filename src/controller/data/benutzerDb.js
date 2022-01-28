@@ -27,26 +27,26 @@ function convertEntityToBenutzerRow(benutzerEntity) {
 }
 
 export default function makeBenutzerDb() {
-    //Insert new Forum
     function insertBenutzer(benutzer) {
         const benutzerRow = convertEntityToBenutzerRow(benutzer)
-        console.log("row", benutzerRow)
+        console.log("Insert User:", { ...benutzerRow, passwort: "***" })
         return dbConnection.insert(benutzerRow).into("benutzer")
     }
 
     //Get ForumList by ParentId
-    function getForumListByParentId(idForum) {
-        return dbConnection("forum")
-            .where("id_parent_forum", idForum)
-            .then((forumList) => forumList.map((forumRow) => convertForumRowToEntity(forumRow)))
+    function getBenutzerList() {
+        return dbConnection("benutzer").then((benutzerList) => benutzerList.map((benutzerRow) => convertBenutzerRowToEntity(benutzerRow)))
     }
 
     function getBenutzerById(idBenutzer) {
-        console.log("GET", idBenutzer)
         return dbConnection("benutzer")
             .where("id_benutzer", idBenutzer)
             .then((benutzerList) => (benutzerList[0] ? convertBenutzerRowToEntity(benutzerList[0]) : null))
     }
 
-    return { insertBenutzer, getForumListByParentId, getBenutzerById }
+    function deleteBenutzerById(idBenutzer) {
+        return dbConnection("benutzer").where("id_benutzer", idBenutzer).del()
+    }
+
+    return { insertBenutzer, getBenutzerList, getBenutzerById, deleteBenutzerById }
 }
