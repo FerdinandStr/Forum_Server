@@ -1,21 +1,22 @@
+import { UnauthorizedError } from "./custErrors"
+
 const jwt = require("jsonwebtoken")
 
 const { TOKEN_KEY } = process.env
+const LOGIN_DURATION = 60 * 60 * 24
 
-function checkToken(req, res, next) {
-    const token = req.cookies["x-access-token"]
+function createToken(tokenData) {
+    const token = jwt.sign(tokenData, TOKEN_KEY, { expiresIn: LOGIN_DURATION })
+    return token
+}
 
-    if (!token) {
-        return res.status(403).send({ error: "A token is required for authentication" })
-    }
-
+function checkToken(token) {
     try {
         const decoded = jwt.verify(token, TOKEN_KEY)
-        req.user = decoded
-        return next()
+        return decoded
     } catch (err) {
-        return res.status(401).send({ error: "Invalid Token" })
+        throw new UnauthorizedError("Invalid Token")
     }
 }
 
-export { checkToken }
+export { createToken, checkToken, LOGIN_DURATION }

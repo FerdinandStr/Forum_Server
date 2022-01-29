@@ -6,7 +6,7 @@ function convertBenutzerRowToEntity(benutzerRow) {
         idStudiengang: benutzerRow.id_studiengang,
         vorname: benutzerRow.vorname,
         nachname: benutzerRow.nachname,
-        passwort: benutzerRow.passwort, //TODO hmmmmm?
+        // passwort: benutzerRow.passwort, //KEEP DEACTIVATED!
         email: benutzerRow.email,
         bildPfad: benutzerRow.bild_pfad,
         statusAktiv: benutzerRow.status_aktiv,
@@ -48,5 +48,11 @@ export default function makeBenutzerDb() {
         return dbConnection("benutzer").where("id_benutzer", idBenutzer).del()
     }
 
-    return { insertBenutzer, getBenutzerList, getBenutzerById, deleteBenutzerById }
+    function getBenutzerForLogin(email) {
+        return dbConnection("benutzer")
+            .where("email", email)
+            .then((benutzerList) => (benutzerList[0] ? { idBenutzer: benutzerList[0].id_benutzer, passwort: benutzerList[0].passwort } : null))
+    }
+
+    return { insertBenutzer, getBenutzerList, getBenutzerById, deleteBenutzerById, getBenutzerForLogin }
 }

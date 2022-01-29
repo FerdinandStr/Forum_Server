@@ -3,9 +3,8 @@ import cors from "cors"
 import cookieParser from "cookie-parser"
 import express from "express"
 import errorController from "./config/express/middleware/errorController"
-import { checkToken } from "./config/express/middleware/auth"
 import forumRoutes from "./controller/routes/forumRoutes"
-import benutzerRoutes from "./controller/routes/benutzerRoutes"
+import benutzerRoutes, { verifyLogin } from "./controller/routes/benutzerRoutes"
 
 const { port } = process.env
 
@@ -17,8 +16,10 @@ server.listen(port, () => {
 server.use(cors({ allowedHeaders: "Content-Type", credentials: true, origin: true }))
 server.use(express.json())
 server.use(cookieParser())
-server.use("/foren", forumRoutes)
 server.use("/benutzer", benutzerRoutes)
+server.use(verifyLogin)
+// ######################## ALL ROUTES BELOW ARE SECURED ######################## //
+server.use("/foren", forumRoutes)
 server.use(errorController)
 
 //DB Routes

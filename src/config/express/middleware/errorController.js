@@ -1,6 +1,7 @@
 function errorController(err, req, res, next) {
     console.log("this is the error middleware!")
-    console.log(err.name, err.code, err.message)
+    // console.log(err.name, err.code, err.message)
+    console.log(err)
 
     //hande PostgreSQL Duplicate Key Error
     if (err.code && err.code == 23505) {
