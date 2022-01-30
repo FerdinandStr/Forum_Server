@@ -35,5 +35,9 @@ export default function makeForumDb() {
             .then((forumList) => forumList.map((forumRow) => convertForumRowToEntity(forumRow)))
     }
 
-    return { insertForum, getForumListByParentId }
+    function deleteForum(idForum) {
+        return dbConnection("forum").where("id_forum", idForum).del()
+    }
+
+    return { insertForum, getForumListByParentId, deleteForum }
 }

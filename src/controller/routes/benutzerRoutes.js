@@ -1,7 +1,7 @@
 import { Router } from "express"
 import { checkToken, createToken, LOGIN_DURATION } from "../../config/express/middleware/auth"
 import createBenutzer from "../../use-cases/benutzer/createBenutzer"
-import deleteBenutzer from "../../use-cases/benutzer/deleteBenutzerById"
+import deleteBenutzer from "../../use-cases/benutzer/deleteBenutzer"
 import getBenutzer from "../../use-cases/benutzer/getBenutzer"
 import listBenutzer from "../../use-cases/benutzer/listBenutzer"
 import loginBenutzer from "../../use-cases/benutzer/loginBenutzer"
