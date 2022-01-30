@@ -10,6 +10,9 @@ export default function makeForum(forum) {
     if (!idParentForum) {
         throw new Error("idParentForum is missing")
     }
+    if (!Number.isInteger(idParentForum)) {
+        throw new Error("idParentForum must be numeric")
+    }
     if (!name) {
         throw new Error("Forum name is missing")
     }
@@ -22,5 +25,5 @@ export default function makeForum(forum) {
     //TODO rollen
     const validRollen = rollen ? rollen.map((rolle) => makeRolle(rolle)) : []
 
-    return { idForum, idParentForum, name, rollen: validRollen, ersteller }
+    return { idForum, idParentForum, name, rollen: validRollen, ersteller, createdAt, updatedAt }
 }

@@ -5,6 +5,5 @@ const benutzerDb = makeBenutzerDb()
 
 export default async function createBenutzer(benutzer) {
     const benutzerEntity = await makeBenutzer(benutzer)
-    const result = await benutzerDb.insertBenutzer(benutzerEntity)
-    return result
+    return benutzerDb.insertBenutzer(benutzerEntity)
 }

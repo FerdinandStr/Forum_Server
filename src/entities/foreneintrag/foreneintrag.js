@@ -1,10 +1,9 @@
+import validator from "validator"
+
 export default function buildMakeForeneintrag({ makeKategorie }) {
     return function makeForeneintrag(comment) {
-        const { idForeneintrag, idForum, name, kategorie, ersteller } = comment
+        const { idForeneintrag, idForum, name, idKategorie, ersteller } = comment
 
-        if (!idForeneintrag) {
-            throw new Error("idForeneintrag is missing")
-        }
         if (!idForum) {
             throw new Error("idForum foreignKey is missing")
         }
@@ -17,8 +16,13 @@ export default function buildMakeForeneintrag({ makeKategorie }) {
         if (!ersteller) {
             throw new Error("Forum ersteller is missing")
         }
-        const validKategorie = makeKategorie(kategorie)
 
-        return Object.freeze({ idForum, name, kategorie: validKategorie, ersteller })
+        if (idKategorie && !Number.isInteger(idKategorie)) {
+            throw new Error("idKategorie must be numeric")
+        }
+
+        console.log("!", idKategorie)
+
+        return Object.freeze({ idForeneintrag, idForum, name, idKategorie, ersteller })
     }
 }

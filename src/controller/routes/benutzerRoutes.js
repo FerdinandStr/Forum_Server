@@ -24,7 +24,7 @@ router.post("/login", (req, res, next) => {
 
     loginBenutzer(email, password)
         .then((benutzer) => {
-            const token = createToken({ benutzerId: benutzer.idBenutzer })
+            const token = createToken({ idBenutzer: benutzer.idBenutzer })
             addToken(res, token)
 
             return res.status(200).json(benutzer)
@@ -65,7 +65,7 @@ router.delete("/:idBenutzer", (req, res, next) => {
 //This will check if a cookie is provided and tell the JS application that the cookie is valid and the user is login in "automatically"
 // router.use("/checkLogin", verifyLogin)
 router.post("/checkLogin", (req, res, next) => {
-    return res.status(200).send({ id: req.benutzer.benutzerId })
+    return res.status(200).send({ id: req.benutzer.idBenutzer })
 })
 
 function addToken(res, token) {

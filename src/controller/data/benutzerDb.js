@@ -33,7 +33,6 @@ export default function makeBenutzerDb() {
         return dbConnection.insert(benutzerRow).into("benutzer")
     }
 
-    //Get ForumList by ParentId
     function getBenutzerList() {
         return dbConnection("benutzer").then((benutzerList) => benutzerList.map((benutzerRow) => convertBenutzerRowToEntity(benutzerRow)))
     }

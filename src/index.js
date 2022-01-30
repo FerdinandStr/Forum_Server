@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser"
 import express from "express"
 import errorController from "./config/express/middleware/errorController"
 import forumRoutes from "./controller/routes/forumRoutes"
+import foreneintragRoutes from "./controller/routes/foreneintragRoutes"
 import benutzerRoutes, { verifyLogin } from "./controller/routes/benutzerRoutes"
 
 const { port } = process.env
@@ -20,6 +21,7 @@ server.use("/benutzer", benutzerRoutes)
 server.use(verifyLogin)
 // ######################## ALL ROUTES BELOW ARE SECURED ######################## //
 server.use("/foren", forumRoutes)
+server.use("/foreneintraege", foreneintragRoutes)
 server.use(errorController)
 
 //DB Routes

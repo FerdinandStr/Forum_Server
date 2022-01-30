@@ -1,0 +1,381 @@
+{
+	"info": {
+		"_postman_id": "6e65828c-b531-4b3a-8aa2-7570df1f6ecc",
+		"name": "Forum",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AuthRoutes",
+			"item": [
+				{
+					"name": "check Login (ping with cookie)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"loginUser\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/benutzer/checkLogin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"benutzer",
+								"checkLogin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Benutzer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"dummy.mail@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/benutzer/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"benutzer",
+								"login"
+							]
+						},
+						"description": "Der Login erstellt ein Cookie mit JWT welches zur Authentifizierung für fast alle anderen Endpoints verwendet wird und automatisch immer wieder mit an den Server übertragen wird"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BenutzerRoutes",
+			"item": [
+				{
+					"name": "create new Benutzer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idStudiengang\": null,\r\n    \"vorname\": \"Dummy\",\r\n    \"nachname\": \"Idiot\",\r\n    \"passwort\": \"123\",\r\n    \"email\": \"dummy.idiot@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/benutzer/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"benutzer",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Benutzer by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/benutzer/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"benutzer",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all Benutzer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/benutzer/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"benutzer",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Benutzer by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/benutzer/31",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"benutzer",
+								"31"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ForumRoutes",
+			"item": [
+				{
+					"name": "Create Forum",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Informatik für Dummies\",\r\n    \"idParentForum\": 3,\r\n    \"ersteller\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/foren",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"foren"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Foren by ParentId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/foren?idParentForum=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"foren"
+							],
+							"query": [
+								{
+									"key": "idParentForum",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Forum by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/foren/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"foren",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ForeneintragRoutes",
+			"item": [
+				{
+					"name": "Create Foreneintrag",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idForum\": 2,\r\n    \"name\": \"Mein erster Post4\",\r\n    \"idKategorie\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/foreneintraege",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"foreneintraege"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Foreneintrag by Query",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/foreneintraege?idForum=2&idKategorie=&idForeneintrag=13",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"foreneintraege"
+							],
+							"query": [
+								{
+									"key": "idForum",
+									"value": "2"
+								},
+								{
+									"key": "idKategorie",
+									"value": ""
+								},
+								{
+									"key": "idForeneintrag",
+									"value": "13"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Foreneintrag by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/foreneintraege/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"foreneintraege",
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BeitragRoutes",
+			"item": []
+		},
+		{
+			"name": "RolleRoutes",
+			"item": []
+		}
+	]
+}
