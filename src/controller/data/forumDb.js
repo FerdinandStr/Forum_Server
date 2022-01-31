@@ -1,5 +1,5 @@
 //THIS SHOULD BE INJECTED
-import dbConnection from "./dbConnection"
+import dbConnection from "../../config/knex/dbConnection"
 
 function convertForumRowToEntity(forumRow) {
     return {

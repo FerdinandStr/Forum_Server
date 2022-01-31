@@ -1,4 +1,4 @@
-import dbConnection from "./dbConnection"
+import dbConnection from "../../config/knex/dbConnection"
 
 function convertBenutzerRowToEntity(benutzerRow) {
     return {
