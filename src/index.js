@@ -8,6 +8,7 @@ import foreneintragRoutes from "./controller/routes/foreneintragRoutes"
 import beitragRoutes from "./controller/routes/beitragRoutes"
 import kategorieRoutes from "./controller/routes/kategorieRoutes"
 import studiengangRoutes from "./controller/routes/studiengangRoutes"
+import rolleRoutes from "./controller/routes/rolleRoutes"
 import benutzerRoutes, { verifyToken } from "./controller/routes/benutzerRoutes"
 
 const { port } = process.env
@@ -28,6 +29,7 @@ server.use("/foreneintraege", foreneintragRoutes)
 server.use("/beitraege", beitragRoutes)
 server.use("/kategorien", kategorieRoutes)
 server.use("/studiengaenge", studiengangRoutes)
+server.use("/rollen", rolleRoutes)
 server.use(errorController)
 
 //DB Routes
