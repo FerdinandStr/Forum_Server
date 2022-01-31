@@ -5,6 +5,7 @@ import deleteBenutzer from "../../use-cases/benutzer/deleteBenutzer"
 import getBenutzer from "../../use-cases/benutzer/getBenutzer"
 import listBenutzer from "../../use-cases/benutzer/listBenutzer"
 import loginBenutzer from "../../use-cases/benutzer/loginBenutzer"
+const COOKIE_NAME = "x-access-token"
 
 const router = Router()
 //create new User
@@ -12,8 +13,10 @@ router.post("/register", function postBenutzer(req, res, next) {
     const { idStudiengang, vorname, nachname, passwort, email } = req.body
 
     createBenutzer({ idStudiengang, vorname, nachname, passwort, email })
-        .then(() => {
-            return res.status(201).send()
+        .then((idBenutzer) => {
+            const token = createToken({ idBenutzer: idBenutzer })
+            addToken(res, token)
+            return res.status(201).json({ idBenutzer })
         })
         .catch(next)
 })
@@ -23,16 +26,22 @@ router.post("/login", (req, res, next) => {
     const { email, password } = req.body
 
     loginBenutzer(email, password)
-        .then((benutzer) => {
-            const token = createToken({ idBenutzer: benutzer.idBenutzer })
+        .then((idBenutzer) => {
+            const token = createToken({ idBenutzer: idBenutzer })
             addToken(res, token)
 
-            return res.status(200).json(benutzer)
+            return res.status(200).json({ idBenutzer })
         })
         .catch(next)
 })
 // ######################## ALL ROUTES BELOW ARE SECURED ######################## //
-router.use("/", verifyLogin)
+router.use("/", verifyToken)
+
+//removes cookie/token
+router.post("/logout", (req, res, next) => {
+    res.clearCookie(COOKIE_NAME)
+    return res.status(200).send()
+})
 
 // get all Users
 router.get("/all", function getUserList(req, res, next) {
@@ -75,15 +84,16 @@ function addToken(res, token) {
         sameSite: true,
         maxAge: LOGIN_DURATION * 1000,
     }
-    res.cookie("x-access-token", token, options)
+    res.cookie(COOKIE_NAME, token, options)
 }
 
-export function verifyLogin(req, res, next) {
-    const token = req.cookies["x-access-token"]
+export function verifyToken(req, res, next) {
+    const token = req.cookies[COOKIE_NAME]
     if (!token) {
         return res.status(401).send({ error: "A token is required for authentication" })
     }
     const decodedToken = checkToken(token)
+
     req.benutzer = decodedToken
     return next()
 }

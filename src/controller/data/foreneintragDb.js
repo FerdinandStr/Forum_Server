@@ -30,8 +30,8 @@ export default function makeForeneintragDb() {
         console.log("ROW", foreneintragRow)
         return dbConnection
             .insert(foreneintragRow)
-            .returning("id_foreneintrag")
             .into("foreneintrag")
+            .returning("id_foreneintrag")
             .then((id) => id[0])
     }
 

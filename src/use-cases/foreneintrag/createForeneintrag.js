@@ -7,8 +7,8 @@ export default async function createForeneintrag(foreneintrag) {
     const foreneintragEntity = makeForeneintrag(foreneintrag)
     const idForeneintrag = await foreneintragDb.insertForeneintrag(foreneintragEntity)
     if (idForeneintrag) {
-        return { idForeneintrag: idForeneintrag }
+        return idForeneintrag
     }
     console.log("ERROR !!!!!!??????", idForeneintrag)
-    throw new Error("Unkown insertion error! Contact admin" + idForeneintrag)
+    throw new Error("Unkown insertion error on Foreneintrag! Contact admin" + idForeneintrag)
 }

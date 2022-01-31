@@ -30,7 +30,11 @@ export default function makeBenutzerDb() {
     function insertBenutzer(benutzer) {
         const benutzerRow = convertEntityToBenutzerRow(benutzer)
         console.log("Insert User:", { ...benutzerRow, passwort: "***" })
-        return dbConnection.insert(benutzerRow).into("benutzer")
+        return dbConnection
+            .insert(benutzerRow)
+            .into("benutzer")
+            .returning("id_benutzer")
+            .then((id) => id[0])
     }
 
     function getBenutzerList() {

@@ -16,23 +16,33 @@ exports.seed = async function (knex) {
     })
 
     console.log("add forum data...")
-    await knex("forum").insert([
-        {
-            id_forum: 1,
+
+    const idMainForum = await knex("forum")
+        .insert({
             id_parent_forum: 1,
             name: "Hauptforum",
             ersteller: 1,
-        },
+        })
+        .returning("id_forum")
+        .then((id) => id[0])
+
+    await knex("forum").insert([
         {
-            id_forum: 2,
-            id_parent_forum: 1,
+            id_parent_forum: idMainForum,
             name: "Wirtschaftsinformatik",
             ersteller: 1,
         },
         {
-            id_forum: 3,
-            id_parent_forum: 1,
+            id_parent_forum: idMainForum,
             name: "Informatik",
+            ersteller: 1,
+        },
+    ])
+
+    await knex("foreneintrag").insert([
+        {
+            id_forum: idMainForum,
+            name: "Der erste Foreneintrag",
             ersteller: 1,
         },
     ])

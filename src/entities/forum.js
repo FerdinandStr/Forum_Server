@@ -5,7 +5,7 @@ function makeRolle(e) {
 
 export default function makeForum(forum) {
     console.log("FORUM", forum)
-    const { idForum = 0, idParentForum = 1, name = "", rollen = [], ersteller, createdAt, updatedAt } = forum
+    const { idForum, idParentForum = 1, name = "", rollen = [], ersteller, createdAt, updatedAt } = forum
 
     if (!idParentForum) {
         throw new Error("idParentForum is missing")

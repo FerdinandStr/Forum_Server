@@ -6,12 +6,13 @@ import listChildForums from "../../use-cases/forum/listChildForums"
 const router = Router()
 
 router.post("/", function postForum(req, res, next) {
-    console.log("what", req.body)
-    const { name, idParentForum, rollen, ersteller } = req.body
+    const { name, idParentForum, rollen } = req.body
+    const ersteller = req.benutzer.idBenutzer
+
     createForum({ name, idParentForum, rollen, ersteller })
-        .then((result) => {
-            console.log("forum commited", result)
-            return res.status(201).send()
+        .then((idForum) => {
+            console.log("forum commited", idForum)
+            return res.status(201).json({ idForum })
         })
         .catch(next)
 })

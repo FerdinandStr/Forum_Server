@@ -1,6 +1,6 @@
 import makeBenutzerDb from "../../controller/data/benutzerDb"
 import bcrypt from "bcrypt"
-import { BadRequestError, UnauthorizedError } from "../../config/express/middleware/custErrors"
+import { BadRequestError, NotFoundError, UnauthorizedError } from "../../config/express/middleware/custErrors"
 const benutzerDb = makeBenutzerDb()
 
 export default async function loginBenutzer(email, password) {
@@ -12,8 +12,8 @@ export default async function loginBenutzer(email, password) {
     if (benutzer) {
         const match = await bcrypt.compare(password, benutzer.passwort)
         if (match) {
-            return { idBenutzer: benutzer.idBenutzer }
+            return benutzer.idBenutzer
         }
-        throw new UnauthorizedError("Email und Passwort Kombination stimmen nicht überein!")
     }
+    throw new UnauthorizedError("Email und Passwort Kombination stimmen nicht überein oder Benutzer existiert nicht!")
 }

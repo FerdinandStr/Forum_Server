@@ -25,7 +25,11 @@ export default function makeForumDb() {
     //Insert new Forum
     function insertForum(forum) {
         const forumRow = convertEntityToForumRow(forum)
-        return dbConnection.insert(forumRow).into("forum")
+        return dbConnection
+            .insert(forumRow)
+            .into("forum")
+            .returning("id_forum")
+            .then((id) => id[0])
     }
 
     //Get ForumList by ParentId

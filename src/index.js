@@ -5,7 +5,8 @@ import express from "express"
 import errorController from "./config/express/middleware/errorController"
 import forumRoutes from "./controller/routes/forumRoutes"
 import foreneintragRoutes from "./controller/routes/foreneintragRoutes"
-import benutzerRoutes, { verifyLogin } from "./controller/routes/benutzerRoutes"
+import beitragRoutes from "./controller/routes/beitragRoutes"
+import benutzerRoutes, { verifyToken } from "./controller/routes/benutzerRoutes"
 
 const { port } = process.env
 
@@ -18,10 +19,11 @@ server.use(cors({ allowedHeaders: "Content-Type", credentials: true, origin: tru
 server.use(express.json())
 server.use(cookieParser())
 server.use("/benutzer", benutzerRoutes)
-server.use(verifyLogin)
+server.use(verifyToken)
 // ######################## ALL ROUTES BELOW ARE SECURED ######################## //
 server.use("/foren", forumRoutes)
 server.use("/foreneintraege", foreneintragRoutes)
+server.use("/beitraege", beitragRoutes)
 server.use(errorController)
 
 //DB Routes

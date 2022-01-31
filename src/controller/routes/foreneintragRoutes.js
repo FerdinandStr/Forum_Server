@@ -13,9 +13,9 @@ router.post("/", function postForeneintrag(req, res, next) {
     const ersteller = req.benutzer.idBenutzer
 
     createForeneintrag({ idForum, name, idKategorie, ersteller })
-        .then((result) => {
+        .then((idForeneintrag) => {
             console.log("foreneintrag commited", result)
-            return res.status(201).json(result)
+            return res.status(201).json({ idForeneintrag })
         })
         .catch(next)
 })
@@ -29,7 +29,7 @@ router.get("/", function getForeneintraegeByQuery(req, res, next) {
         .catch(next)
 })
 
-router.delete("/:idForeneintrag", function deletForeneintragById(req, res, next) {
+router.delete("/:idForeneintrag", function deleteForeneintragById(req, res, next) {
     const { idForeneintrag } = req.params
     deleteForeneintrag(idForeneintrag)
         .then(() => {

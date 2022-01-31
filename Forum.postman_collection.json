@@ -44,7 +44,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"dummy.mail@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+							"raw": "{\r\n    \"email\": \"dummy.idiot@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -66,6 +66,36 @@
 						"description": "Der Login erstellt ein Cookie mit JWT welches zur Authentifizierung für fast alle anderen Endpoints verwendet wird und automatisch immer wieder mit an den Server übertragen wird"
 					},
 					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"dummy.idiot@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/benutzer/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"benutzer",
+								"logout"
+							]
+						},
+						"description": "Der Login erstellt ein Cookie mit JWT welches zur Authentifizierung für fast alle anderen Endpoints verwendet wird und automatisch immer wieder mit an den Server übertragen wird"
+					},
+					"response": []
 				}
 			]
 		},
@@ -79,7 +109,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idStudiengang\": null,\r\n    \"vorname\": \"Dummy\",\r\n    \"nachname\": \"Idiot\",\r\n    \"passwort\": \"123\",\r\n    \"email\": \"dummy.idiot@gmail.com\"\r\n}",
+							"raw": "{\r\n    \"idStudiengang\": null,\r\n    \"vorname\": \"Dummy\",\r\n    \"nachname\": \"Idiot3\",\r\n    \"passwort\": \"123\",\r\n    \"email\": \"dummy.idiot3@gmail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -173,7 +203,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Informatik für Dummies\",\r\n    \"idParentForum\": 3,\r\n    \"ersteller\": 1\r\n}",
+							"raw": "{\r\n    \"name\": \"WI Shittalk\",\r\n    \"idParentForum\": 2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -311,7 +341,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/foreneintraege?idForum=2&idKategorie=&idForeneintrag=13",
+							"raw": "http://localhost:3000/foreneintraege?idForum=2&idKategorie=&idForeneintrag=",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -331,7 +361,7 @@
 								},
 								{
 									"key": "idForeneintrag",
-									"value": "13"
+									"value": ""
 								}
 							]
 						}
@@ -370,12 +400,119 @@
 			]
 		},
 		{
-			"name": "BeitragRoutes",
+			"name": "RolleRoutes",
 			"item": []
 		},
 		{
-			"name": "RolleRoutes",
-			"item": []
+			"name": "BeitragRoutes",
+			"item": [
+				{
+					"name": "Create Beitrag",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idForum\": 1,\r\n    \"idForeneintrag\": 3,\r\n    \"inhalt\": \"Neu23!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/beitraege",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"beitraege"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Beitrag by Query",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/beitraege?idBeitrag=&idForum=&idForeneintrag=3&ersteller=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"beitraege"
+							],
+							"query": [
+								{
+									"key": "idBeitrag",
+									"value": ""
+								},
+								{
+									"key": "idForum",
+									"value": ""
+								},
+								{
+									"key": "idForeneintrag",
+									"value": "3"
+								},
+								{
+									"key": "ersteller",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Beitrag by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/beitraege/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"beitraege",
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
