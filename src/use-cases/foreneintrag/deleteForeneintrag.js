@@ -12,6 +12,6 @@ export default async function deleteForeneintrag(idForeneintrag) {
         }
         throw new NotFoundError("Foreneintrag with id " + idForeneintrag + " not found; result=" + result)
     } else {
-        throw new BadRequestError("idForeneintrag is necessary => " + idForeneintrag)
+        throw new BadRequestError("idForeneintrag is missing => " + idForeneintrag)
     }
 }

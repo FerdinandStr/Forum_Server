@@ -13,6 +13,6 @@ export default async function deleteForum(idForum) {
         }
         throw new NotFoundError("Forum with id " + idForum + " not found; result=" + result)
     } else {
-        throw new BadRequestError("idForum is necessary => " + idForum)
+        throw new BadRequestError("idForum is missing => " + idForum)
     }
 }

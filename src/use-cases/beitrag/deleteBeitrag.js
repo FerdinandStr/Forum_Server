@@ -12,6 +12,6 @@ export default async function deleteBeitrag(idBeitrag) {
         }
         throw new NotFoundError("Beitrag with id " + idBeitrag + " not found; result=" + result)
     } else {
-        throw new BadRequestError("idBeitrag is necessary => " + idBeitrag)
+        throw new BadRequestError("idBeitrag is missing => " + idBeitrag)
     }
 }

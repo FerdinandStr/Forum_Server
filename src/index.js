@@ -6,6 +6,7 @@ import errorController from "./config/express/middleware/errorController"
 import forumRoutes from "./controller/routes/forumRoutes"
 import foreneintragRoutes from "./controller/routes/foreneintragRoutes"
 import beitragRoutes from "./controller/routes/beitragRoutes"
+import kategorieRoutes from "./controller/routes/kategorieRoutes"
 import benutzerRoutes, { verifyToken } from "./controller/routes/benutzerRoutes"
 
 const { port } = process.env
@@ -24,6 +25,7 @@ server.use(verifyToken)
 server.use("/foren", forumRoutes)
 server.use("/foreneintraege", foreneintragRoutes)
 server.use("/beitraege", beitragRoutes)
+server.use("/kategorien", kategorieRoutes)
 server.use(errorController)
 
 //DB Routes
