@@ -9,9 +9,9 @@ router.post("/", function postKategorie(req, res, next) {
     const { name } = req.body
 
     createKategorie({ name })
-        .then((kategorie) => {
-            console.log("Kategorie commited", kategorie)
-            return res.status(201).json({ kategorie })
+        .then((idKategorie) => {
+            console.log("Kategorie commited", idKategorie)
+            return res.status(201).json({ idKategorie })
         })
         .catch(next)
 })

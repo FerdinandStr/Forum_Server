@@ -7,5 +7,5 @@ export default async function listKategorie({ idKategorie, name }) {
     if (kategorieList.length > 0) {
         return kategorieList
     }
-    throw new NotFoundError("Keine Foreneinträge gefunden")
+    throw new NotFoundError("Keine Kategorien gefunden")
 }

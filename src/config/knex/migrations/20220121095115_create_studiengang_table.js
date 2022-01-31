@@ -3,7 +3,7 @@ exports.up = function (knex) {
     return knex.schema.createTable("studiengang", (table) => {
         table.increments("id_studiengang")
         table.string("name")
-        table.string("jahrgang")
+        table.string("kuerzel", 10)
         table.timestamps(true, true)
     })
 }

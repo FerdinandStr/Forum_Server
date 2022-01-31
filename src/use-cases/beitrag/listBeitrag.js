@@ -7,5 +7,5 @@ export default async function listBeitrag({ idBeitrag, idForum, idForeneintrag, 
     if (beitragList.length > 0) {
         return beitragList
     }
-    throw new NotFoundError("Keine Foreneinträge gefunden")
+    throw new NotFoundError("Keine Beiträge gefunden")
 }

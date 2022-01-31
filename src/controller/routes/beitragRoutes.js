@@ -10,9 +10,9 @@ router.post("/", function postBeitrag(req, res, next) {
     const ersteller = req.benutzer.idBenutzer
 
     createBeitrag({ idForum, idForeneintrag, inhalt, ersteller })
-        .then((beitrag) => {
-            console.log("Beitrag commited", beitrag)
-            return res.status(201).json({ beitrag })
+        .then((idBeitrag) => {
+            console.log("Beitrag commited", idBeitrag)
+            return res.status(201).json({ idBeitrag })
         })
         .catch(next)
 })
