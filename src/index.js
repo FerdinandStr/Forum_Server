@@ -21,16 +21,14 @@ server.listen(port, () => {
 server.use(cors({ allowedHeaders: "Content-Type", credentials: true, origin: true }))
 server.use(express.json())
 server.use(cookieParser())
+
 server.use("/benutzer", benutzerRoutes)
-server.use(verifyToken)
-// ######################## ALL ROUTES BELOW ARE SECURED ######################## //
 server.use("/foren", forumRoutes)
 server.use("/foreneintraege", foreneintragRoutes)
 server.use("/beitraege", beitragRoutes)
 server.use("/kategorien", kategorieRoutes)
 server.use("/studiengaenge", studiengangRoutes)
 server.use("/rollen", rolleRoutes)
-server.use(errorController)
+server.use("/files", express.static("public"))
 
-//DB Routes
-// server.use(checkToken)
+server.use(errorController)

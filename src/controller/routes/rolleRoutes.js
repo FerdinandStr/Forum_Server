@@ -2,8 +2,21 @@ import { Router } from "express"
 import createRolle from "../../use-cases/rolle/createRolle"
 import deleteRolle from "../../use-cases/rolle/deleteRolle"
 import listRolle from "../../use-cases/rolle/listRolle"
+import { verifyToken } from "./benutzerRoutes"
 
 const router = Router()
+
+router.get("/", function getRollenByQuery(req, res, next) {
+    const { idRolle, name } = req.query
+    listRolle({ idRolle, name })
+        .then((result) => {
+            return res.status(200).json(result)
+        })
+        .catch(next)
+})
+
+router.use("/", verifyToken)
+// ######################## ALL ROUTES BELOW ARE SECURED ######################## //
 
 router.post("/", function postRolle(req, res, next) {
     const { name, kuerzel } = req.body
@@ -12,15 +25,6 @@ router.post("/", function postRolle(req, res, next) {
         .then((idRolle) => {
             console.log("Rolle commited", idRolle)
             return res.status(201).json({ idRolle })
-        })
-        .catch(next)
-})
-
-router.get("/", function getBeitraegeByQuery(req, res, next) {
-    const { idRolle, name } = req.query
-    listRolle({ idRolle, name })
-        .then((result) => {
-            return res.status(200).json(result)
         })
         .catch(next)
 })

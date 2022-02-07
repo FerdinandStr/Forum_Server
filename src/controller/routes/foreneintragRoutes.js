@@ -5,8 +5,21 @@ import listForeneintraege from "../../use-cases/foreneintrag/listForeneintrag"
 import createForum from "../../use-cases/forum/createForum"
 import deleteForum from "../../use-cases/forum/deleteForum"
 import listChildForums from "../../use-cases/forum/listChildForums"
+import { verifyToken } from "./benutzerRoutes"
 
 const router = Router()
+
+router.get("/", function getForeneintraegeByQuery(req, res, next) {
+    const { idForeneintrag, idForum, idKategorie } = req.query
+    listForeneintraege({ idForeneintrag, idForum, idKategorie })
+        .then((result) => {
+            return res.status(200).json(result)
+        })
+        .catch(next)
+})
+
+router.use("/", verifyToken)
+// ######################## ALL ROUTES BELOW ARE SECURED ######################## //
 
 router.post("/", function postForeneintrag(req, res, next) {
     const { idForum, name, idKategorie } = req.body
@@ -16,15 +29,6 @@ router.post("/", function postForeneintrag(req, res, next) {
         .then((idForeneintrag) => {
             console.log("foreneintrag commited", result)
             return res.status(201).json({ idForeneintrag })
-        })
-        .catch(next)
-})
-
-router.get("/", function getForeneintraegeByQuery(req, res, next) {
-    const { idForeneintrag, idForum, idKategorie } = req.query
-    listForeneintraege({ idForeneintrag, idForum, idKategorie })
-        .then((result) => {
-            return res.status(200).json(result)
         })
         .catch(next)
 })
