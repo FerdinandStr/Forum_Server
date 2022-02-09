@@ -9,7 +9,7 @@ import beitragRoutes from "./controller/routes/beitragRoutes"
 import kategorieRoutes from "./controller/routes/kategorieRoutes"
 import studiengangRoutes from "./controller/routes/studiengangRoutes"
 import rolleRoutes from "./controller/routes/rolleRoutes"
-import benutzerRoutes, { verifyToken } from "./controller/routes/benutzerRoutes"
+import benutzerRoutes from "./controller/routes/benutzerRoutes"
 
 const { port } = process.env
 

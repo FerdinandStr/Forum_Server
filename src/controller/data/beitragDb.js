@@ -52,9 +52,24 @@ export default function makeBeitragDb() {
         return query.then((beitragList) => beitragList.map((row) => convertBeitragRowToEntity(row)))
     }
 
+    function getBeitragListForForeneintrag(idForeneintrag) {
+        return dbConnection("beitrag")
+            .join("benutzer", "benutzer.id_benutzer", "=", "beitrag.ersteller")
+            .leftJoin("studiengang", "studiengang.id_studiengang", "=", "benutzer.id_studiengang")
+            .where("id_foreneintrag", idForeneintrag)
+            .then((beitragList) =>
+                beitragList.map((dataRow) => ({
+                    ...convertBeitragRowToEntity(dataRow),
+                    erstellerName: dataRow.vorname + " " + dataRow.nachname,
+                    studiengangKuerzel: dataRow.kuerzel,
+                    studiengangName: dataRow.name,
+                }))
+            )
+    }
+
     function deleteBeitrag(idBeitrag) {
         return dbConnection("beitrag").where("id_beitrag", idBeitrag).del()
     }
 
-    return { insertBeitrag, getBeitragList, deleteBeitrag }
+    return { insertBeitrag, getBeitragList, getBeitragListForForeneintrag, deleteBeitrag }
 }

@@ -1,4 +1,5 @@
 import { Router } from "express"
+import listForeneintraege from "../../use-cases/foreneintrag/listForeneintrag"
 import createForum from "../../use-cases/forum/createForum"
 import deleteForum from "../../use-cases/forum/deleteForum"
 import listChildForums from "../../use-cases/forum/listChildForums"
@@ -7,8 +8,26 @@ import { verifyToken } from "./benutzerRoutes"
 const router = Router()
 
 router.get("/", function getForumsByQuery(req, res, next) {
-    const { idParentForum } = req.query
-    listChildForums({ idParentForum })
+    const { idParentForum } = req.query //hier erweitern oder route löschen
+    listChildForums(idParentForum)
+        .then((result) => {
+            return res.status(200).json(result)
+        })
+        .catch(next)
+})
+
+router.get("/:idForum/unterforen", function getUnterforen(req, res, next) {
+    const { idForum } = req.params
+    listChildForums(idForum)
+        .then((result) => {
+            return res.status(200).json(result)
+        })
+        .catch(next)
+})
+
+router.get("/:idForum/foreneintraege", function getForeneintraegeByForumId(req, res, next) {
+    const { idForum } = req.query
+    listForeneintraege({ idForeneintrag: undefined, idForum })
         .then((result) => {
             return res.status(200).json(result)
         })

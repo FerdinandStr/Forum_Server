@@ -203,7 +203,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"WI Shittalk\",\r\n    \"idParentForum\": 2\r\n}",
+							"raw": "{\r\n    \"name\": \"Informatik\",\r\n    \"idParentForum\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -289,6 +289,72 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "get Unterforen",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/foren/2/unterforen",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"foren",
+								"2",
+								"unterforen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Foreneinträge in Forum",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/foren/1/foreneintraege",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"foren",
+								"1",
+								"foreneintraege"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -302,7 +368,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idForum\": 2,\r\n    \"name\": \"Mein erster Post4\",\r\n    \"idKategorie\": 2\r\n}",
+							"raw": "{\r\n    \"idForum\": 2,\r\n    \"name\": \"Mein erster Post6\",\r\n    \"idKategorie\": 2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -392,6 +458,56 @@
 							"path": [
 								"foreneintraege",
 								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Beiträge for Foreneintrag with Ersteller",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/foreneintraege/2/beitraege",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"foreneintraege",
+								"2",
+								"beitraege"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Foreneintrag",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idForum\": 15,\r\n    \"name\": \"Aktuallisierter Name 2\",\r\n    \"idKategorie\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/foreneintraege/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"foreneintraege",
+								"3"
 							]
 						}
 					},
