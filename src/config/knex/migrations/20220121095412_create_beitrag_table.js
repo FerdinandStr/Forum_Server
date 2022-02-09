@@ -5,6 +5,7 @@ exports.up = function (knex) {
         table.integer("id_forum").unsigned().notNullable().references("forum.id_forum")
         table.integer("id_foreneintrag").unsigned().notNullable().references("id_foreneintrag").inTable("foreneintrag")
         table.string("inhalt", 65535).notNullable()
+        table.integer("ersteller").unsigned().notNullable().references("benutzer.id_benutzer")
         table.timestamps(true, true)
     })
 }

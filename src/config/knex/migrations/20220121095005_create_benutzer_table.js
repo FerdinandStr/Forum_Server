@@ -6,7 +6,7 @@ exports.up = function (knex) {
         table.string("vorname")
         table.string("nachname")
         table.string("passwort").notNullable()
-        table.string("email").notNullable()
+        table.string("email").notNullable().unique("email")
         table.string("bild_pfad")
         table.integer("status_aktiv").notNullable().defaultTo("1")
         table.timestamps(true, true)
