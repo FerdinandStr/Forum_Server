@@ -1,4 +1,8 @@
 exports.seed = async function (knex) {
+    console.log("delete beitrag data...")
+    await knex("beitrag").del()
+    console.log("delete foreneintrag data...")
+    await knex("foreneintrag").del()
     console.log("delete forum data...")
     await knex("forum").del()
     console.log("delete benutzer data...")
@@ -16,34 +20,35 @@ exports.seed = async function (knex) {
     })
 
     console.log("add forum data...")
-
     const idMainForum = await knex("forum")
         .insert({
-            id_parent_forum: 1,
+
             name: "Hauptforum",
             ersteller: 1,
         })
         .returning("id_forum")
         .then((id) => id[0])
 
-    await knex("forum").insert([
-        {
-            id_parent_forum: idMainForum,
-            name: "Wirtschaftsinformatik",
-            ersteller: 1,
-        },
-        {
-            id_parent_forum: idMainForum,
-            name: "Informatik",
-            ersteller: 1,
-        },
-    ])
+    console.log("MainForum added")
 
-    await knex("foreneintrag").insert([
+
+    const idinfo = await knex("foreneintrag")                       //Foreneintrag
+        .insert({
+            id_forum: idMainForum,
+            name: "Infos zum Forum",
+            ersteller: 1,
+        })
+        .returning("id_foreneintrag")
+        .then((id) => id[0])
+
+
+    await knex("beitrag").insert([                                      //Beitrag
         {
             id_forum: idMainForum,
-            name: "Der erste Foreneintrag",
+            id_foreneintrag: idinfo,
+            inhalt: "Willkommen in unserem Studentenforum. Bitte geht respektvoll miteinander um.",
             ersteller: 1,
+
         },
     ])
 

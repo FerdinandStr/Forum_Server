@@ -60,9 +60,12 @@ export default function makeBeitragDb() {
             .then((beitragList) =>
                 beitragList.map((dataRow) => ({
                     ...convertBeitragRowToEntity(dataRow),
-                    erstellerName: dataRow.vorname + " " + dataRow.nachname,
-                    studiengangKuerzel: dataRow.kuerzel,
-                    studiengangName: dataRow.name,
+                    ersteller: {
+                        idErsteller: dataRow.ersteller,
+                        erstellerName: dataRow.vorname + " " + dataRow.nachname,
+                        studiengangKuerzel: dataRow.kuerzel,
+                        studiengangName: dataRow.name,
+                    },
                 }))
             )
     }
