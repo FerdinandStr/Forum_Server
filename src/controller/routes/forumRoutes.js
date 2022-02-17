@@ -2,6 +2,7 @@ import { Router } from "express"
 import listForeneintraege from "../../use-cases/foreneintrag/listForeneintrag"
 import createForum from "../../use-cases/forum/createForum"
 import deleteForum from "../../use-cases/forum/deleteForum"
+import getForumParents from "../../use-cases/forum/getForumParents"
 import listChildForums from "../../use-cases/forum/listChildForums"
 import { verifyToken } from "./benutzerRoutes"
 
@@ -26,10 +27,19 @@ router.get("/:idForum/unterforen", function getUnterforen(req, res, next) {
 })
 
 router.get("/:idForum/foreneintraege", function getForeneintraegeByForumId(req, res, next) {
-    const { idForum } = req.query
-    listForeneintraege({ idForeneintrag: undefined, idForum })
+    const { idForum } = req.params
+    listForeneintraege({ idForum })
         .then((result) => {
             return res.status(200).json(result)
+        })
+        .catch(next)
+})
+
+router.get("/:idForum/forumParents", function getForumParentPath(req, res, next) {
+    const { idForum } = req.params
+    getForumParents(idForum)
+        .then((data) => {
+            res.json(data)
         })
         .catch(next)
 })

@@ -49,7 +49,7 @@ export default function makeForeneintragDb() {
         if (idForeneintrag) {
             query.where("id_foreneintrag", idForeneintrag)
         }
-        if (idForeneintrag) {
+        if (idForum) {
             query.where("id_forum", idForum) //and default
         }
         if (idKategorie) {

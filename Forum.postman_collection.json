@@ -44,7 +44,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"dummy.idiot@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+							"raw": "{\r\n    \"email\": \"a@b.cc\",\r\n    \"password\": \"abc\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -109,7 +109,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idStudiengang\": null,\r\n    \"vorname\": \"Dummy\",\r\n    \"nachname\": \"Idiot3\",\r\n    \"passwort\": \"123\",\r\n    \"email\": \"dummy.idiot3@gmail.com\"\r\n}",
+							"raw": "{\r\n    \"idStudiengang\": null,\r\n    \"vorname\": \"a@b.cc\",\r\n    \"nachname\": \"pass abc\",\r\n    \"passwort\": \"abc\",\r\n    \"email\": \"a@b.cc\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -203,7 +203,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Informatik\",\r\n    \"idParentForum\": 1\r\n}",
+							"raw": "{\r\n    \"name\": \"Ultra deep\",\r\n    \"idParentForum\": 13\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -355,6 +355,27 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "get Forum Parent Path",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/foren/3/forumParents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"foren",
+								"3",
+								"forumParents"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -407,7 +428,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/foreneintraege?idForum=2&idKategorie=&idForeneintrag=",
+							"raw": "http://localhost:3000/foreneintraege?idForum=1&idKategorie=&idForeneintrag=",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -419,7 +440,7 @@
 							"query": [
 								{
 									"key": "idForum",
-									"value": "2"
+									"value": "1"
 								},
 								{
 									"key": "idKategorie",

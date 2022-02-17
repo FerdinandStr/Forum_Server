@@ -9,8 +9,8 @@ import { verifyToken } from "./benutzerRoutes"
 const router = Router()
 
 router.get("/", function getForeneintraegeByQuery(req, res, next) {
-    const { idForeneintrag, idForum, idKategorie } = req.query
-    listForeneintraege({ idForeneintrag, idForum, idKategorie })
+    const { idForeneintrag, idForum, idKategorie, name } = req.query
+    listForeneintraege({ idForeneintrag, idForum, idKategorie, name })
         .then((result) => {
             return res.status(200).json(result)
         })

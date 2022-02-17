@@ -3,23 +3,16 @@
 //npx knex  --knexfile .\src\config\knex\knexfile.js --env postgresql migrate:latest
 //npx knex  --knexfile .\src\config\knex\knexfile.js --env postgresql seed:make 00_forum_data
 //npx knex  --knexfile .\src\config\knex\knexfile.js --env postgresql seed:run
-
+const { DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASS } = process.env
 module.exports = {
-    //   development: {
-    //     client: 'sqlite3',
-    //     connection: {
-    //       filename: './dev.sqlite3'
-    //     }
-    //   },
-
     postgresql: {
         client: "postgresql",
         connection: {
-            host: "192.168.2.148",
-            port: 5432,
-            database: "forum_db", //TODO!!!!!!!!!.env
-            user: "root", //TODO!!!!!!!!!.env
-            password: "ForumLTMF20postgreSQL14", //TODO!!!!!!!!!.env
+            host: DB_HOST,
+            port: DB_PORT,
+            database: DB_NAME,
+            user: DB_USER,
+            password: DB_PASS,
         },
         pool: {
             min: 2,
@@ -29,39 +22,6 @@ module.exports = {
             tableName: "knex_migrations",
         },
     },
-
-    postgresql_manni: {
-        client: "postgresql",
-        connection: {
-            host: "127.0.0.1",
-            port: 5432,
-            database: "forum_db", //TODO!!!!!!!!!.env
-            user: "postgres", //TODO!!!!!!!!!.env
-            password: "root", //TODO!!!!!!!!!.env
-        },
-        pool: {
-            min: 2,
-            max: 10,
-        },
-        migrations: {
-            tableName: "knex_migrations",
-        },
-    },
-
-    sqlite: {
-        client: "sqlite",
-        connection: {
-            //FILE
-        },
-        pool: {
-            min: 2,
-            max: 10,
-        },
-        migrations: {
-            tableName: "knex_migrations",
-        },
-    },
-
     production: {
         client: "postgresql",
         connection: {

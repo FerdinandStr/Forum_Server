@@ -16,8 +16,12 @@ export default function makeForum(forum) {
     if (!name) {
         throw new Error("Forum name is missing")
     }
-    if (name.length < 2) {
-        throw new Error("Forum name must be longer than 3 chars")
+    if (name.length < 1) {
+        throw new Error("Forum name must be longer than 1 char")
+    }
+    if (name.includes("->")) {
+        // "->" Zum trennen der Path Werte, darum verboten
+        throw new Error("Forum name consists of forbidden characters")
     }
     if (!ersteller) {
         throw new Error("Forum Ersteller is missing")

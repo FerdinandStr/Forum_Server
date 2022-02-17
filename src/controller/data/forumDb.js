@@ -43,5 +43,26 @@ export default function makeForumDb() {
         return dbConnection("forum").where("id_forum", idForum).del()
     }
 
-    return { insertForum, getForumListByParentId, deleteForum }
+    function getForumParents(idForum) {
+        return dbConnection
+            .raw(
+                "WITH RECURSIVE nodes_cte( " +
+                    "id_forum, id_parent_forum, name, depth, id_path, name_path) AS( " +
+                    "SELECT tn.id_forum, tn.id_parent_forum, tn.name, 1::INT AS depth, tn.id_forum::TEXT AS id_path, tn.name::TEXT AS name_path " +
+                    "FROM public.forum AS tn  " +
+                    "WHERE tn.id_parent_forum IS NULL " +
+                    "UNION ALL " +
+                    "SELECT c.id_forum, c.id_parent_forum, c.name, p.depth + 1 AS depth,  " +
+                    "(p.id_path || '->' || c.id_forum::TEXT), " +
+                    "(p.name_path || '->' || c.name::TEXT)  " +
+                    "FROM nodes_cte AS p, public.forum AS c  " +
+                    "WHERE c.id_parent_forum = p.id_forum " +
+                    ") " +
+                    "SELECT id_path, name_path FROM nodes_cte AS n WHERE n.id_forum = ? ",
+                [idForum]
+            )
+            .then((result) => (result.rows[0] ? result.rows[0] : false))
+    }
+
+    return { insertForum, getForumListByParentId, deleteForum, getForumParents }
 }
