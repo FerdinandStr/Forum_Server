@@ -16,8 +16,8 @@ export default function makeForum(forum) {
     if (!name) {
         throw new Error("Forum name is missing")
     }
-    if (name.length < 5) {
-        throw new Error("Forum name must be longer than 5 chars")
+    if (name.length < 2) {
+        throw new Error("Forum name must be longer than 3 chars")
     }
     if (!ersteller) {
         throw new Error("Forum Ersteller is missing")

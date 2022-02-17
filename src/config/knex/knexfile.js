@@ -29,6 +29,25 @@ module.exports = {
             tableName: "knex_migrations",
         },
     },
+
+    postgresql_manni: {
+        client: "postgresql",
+        connection: {
+            host: "127.0.0.1",
+            port: 5432,
+            database: "forum_db", //TODO!!!!!!!!!.env
+            user: "postgres", //TODO!!!!!!!!!.env
+            password: "root", //TODO!!!!!!!!!.env
+        },
+        pool: {
+            min: 2,
+            max: 10,
+        },
+        migrations: {
+            tableName: "knex_migrations",
+        },
+    },
+
     sqlite: {
         client: "sqlite",
         connection: {
