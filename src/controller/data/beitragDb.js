@@ -63,6 +63,7 @@ export default function makeBeitragDb() {
                     ersteller: {
                         idErsteller: dataRow.ersteller,
                         erstellerName: dataRow.vorname + " " + dataRow.nachname,
+                        pfad: dataRow.bild_pfad,
                         studiengangKuerzel: dataRow.kuerzel,
                         studiengangName: dataRow.name,
                     },
