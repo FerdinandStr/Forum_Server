@@ -29,6 +29,6 @@ server.use("/beitraege", beitragRoutes)
 server.use("/kategorien", kategorieRoutes)
 server.use("/studiengaenge", studiengangRoutes)
 server.use("/rollen", rolleRoutes)
-server.use(express.static("public"))
+server.use("/files", express.static("public"))
 
 server.use(errorController)
