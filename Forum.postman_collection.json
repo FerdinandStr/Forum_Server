@@ -242,7 +242,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/foren?idParentForum=1",
+							"raw": "http://localhost:3000/foren?idParentForum=10",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -254,7 +254,7 @@
 							"query": [
 								{
 									"key": "idParentForum",
-									"value": "1"
+									"value": "10"
 								}
 							]
 						}
@@ -341,7 +341,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/foren/1/foreneintraege",
+							"raw": "http://localhost:3000/foren/3/foreneintraege?limit=1&offset=0",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -349,8 +349,18 @@
 							"port": "3000",
 							"path": [
 								"foren",
-								"1",
+								"3",
 								"foreneintraege"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
 							]
 						}
 					},
@@ -389,7 +399,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idForum\": 2,\r\n    \"name\": \"Mein erster Post6\",\r\n    \"idKategorie\": 2\r\n}",
+							"raw": "{\r\n    \"idForum\": 10,\r\n    \"name\": \"Fast Leer\",\r\n    \"idKategorie\": 2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -490,7 +500,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/foreneintraege/2/beitraege",
+							"raw": "http://localhost:3000/foreneintraege/29/beitraege?limit=10&offset=0",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -498,8 +508,18 @@
 							"port": "3000",
 							"path": [
 								"foreneintraege",
-								"2",
+								"29",
 								"beitraege"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
 							]
 						}
 					},
@@ -550,7 +570,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idForum\": 1,\r\n    \"idForeneintrag\": 3,\r\n    \"inhalt\": \"Neu23!\"\r\n}",
+							"raw": "{\r\n    \"idForum\": 3,\r\n    \"idForeneintrag\": 2,\r\n    \"inhalt\": \"NEUNEUNEU\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -867,7 +887,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Wirtschaftsinformatik\",\r\n    \"kuerzel\": \"Müll\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Wirtschaftsinformatik\",\r\n    \"kuerzel\": \"WWI20B\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
