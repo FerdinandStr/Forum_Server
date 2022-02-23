@@ -23,6 +23,18 @@ function convertEntityToBeitragRow(beitragEntity) {
     }
 }
 
+export function setupErstellerInfo(dataRow) {
+    return {
+        ersteller: {
+            idErsteller: dataRow.ersteller,
+            erstellerName: dataRow.vorname + " " + dataRow.nachname,
+            studiengangKuerzel: dataRow.kuerzel,
+            studiengangName: dataRow.studiengang_name,
+            pfad: dataRow.bild_pfad,
+        },
+    }
+}
+
 export default function makeBeitragDb() {
     //Insert new Beitrag
     function insertBeitrag(beitrag) {
@@ -52,23 +64,20 @@ export default function makeBeitragDb() {
         return query.then((beitragList) => beitragList.map((row) => convertBeitragRowToEntity(row)))
     }
 
-    function getBeitragListForForeneintrag(idForeneintrag) {
-        return dbConnection("beitrag")
+    function getBeitragListForForeneintrag(idForeneintrag, limit, offset) {
+        return dbConnection
+            .select("*", "studiengang.name as studiengang_name")
+            .from({ beitrag: dbConnection("beitrag").where("beitrag.id_foreneintrag", idForeneintrag).limit(limit).offset(offset) })
             .join("benutzer", "benutzer.id_benutzer", "=", "beitrag.ersteller")
             .leftJoin("studiengang", "studiengang.id_studiengang", "=", "benutzer.id_studiengang")
-            .where("id_foreneintrag", idForeneintrag)
-            .then((beitragList) =>
-                beitragList.map((dataRow) => ({
+            .orderBy("beitrag.id_beitrag")
+            .then((beitragList) => {
+                console.log("BeitragList", beitragList)
+                return beitragList.map((dataRow) => ({
                     ...convertBeitragRowToEntity(dataRow),
-                    ersteller: {
-                        idErsteller: dataRow.ersteller,
-                        erstellerName: dataRow.vorname + " " + dataRow.nachname,
-                        pfad: dataRow.bild_pfad,
-                        studiengangKuerzel: dataRow.kuerzel,
-                        studiengangName: dataRow.name,
-                    },
+                    ...setupErstellerInfo(dataRow),
                 }))
-            )
+            })
     }
 
     function deleteBeitrag(idBeitrag) {

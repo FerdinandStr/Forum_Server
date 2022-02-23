@@ -20,8 +20,9 @@ router.get("/", function getForeneintraegeByQuery(req, res, next) {
 //get all Beiträge for Foreneintrag with Creator and Info
 router.get("/:idForeneintrag/beitraege", function getBeitraegeForForeneintrag(req, res, next) {
     const { idForeneintrag } = req.params
+    const { limit, offset } = req.query
 
-    listBeitraegeForForeneintrag(idForeneintrag)
+    listBeitraegeForForeneintrag(idForeneintrag, limit, offset)
         .then((result) => {
             return res.status(200).json(result)
         })

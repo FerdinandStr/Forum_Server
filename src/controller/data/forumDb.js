@@ -33,9 +33,11 @@ export default function makeForumDb() {
     }
 
     //Get ForumList by ParentId
-    function getForumListByParentId(idForum) {
+    function getForumListByParentId(idForum, limit, offset) {
         return dbConnection("forum")
             .where("id_parent_forum", idForum)
+            .limit(limit)
+            .offset(offset)
             .then((forumList) => forumList.map((forumRow) => convertForumRowToEntity(forumRow)))
     }
 

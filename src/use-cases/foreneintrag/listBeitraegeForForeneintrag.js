@@ -2,8 +2,8 @@ import { NotFoundError } from "../../config/express/middleware/custErrors"
 import makeBeitragDb from "../../controller/data/beitragDb"
 const beitragDb = makeBeitragDb()
 
-export default async function listBeitraegeForForeneintrag(idForeneintrag) {
-    const foreneintragList = await beitragDb.getBeitragListForForeneintrag(idForeneintrag)
+export default async function listBeitraegeForForeneintrag(idForeneintrag, limit, offset) {
+    const foreneintragList = await beitragDb.getBeitragListForForeneintrag(idForeneintrag, limit, offset)
     if (foreneintragList.length > 0) {
         return foreneintragList
     }

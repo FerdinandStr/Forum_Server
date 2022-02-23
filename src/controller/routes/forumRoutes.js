@@ -1,9 +1,9 @@
 import { Router } from "express"
-import listForeneintraege from "../../use-cases/foreneintrag/listForeneintrag"
 import createForum from "../../use-cases/forum/createForum"
 import deleteForum from "../../use-cases/forum/deleteForum"
 import getForumParents from "../../use-cases/forum/getForumParents"
 import listChildForums from "../../use-cases/forum/listChildForums"
+import listForeneintraegeForForum from "../../use-cases/forum/listForeneitraegeForForum"
 import { verifyToken } from "./benutzerRoutes"
 
 const router = Router()
@@ -19,7 +19,9 @@ router.get("/", function getForumsByQuery(req, res, next) {
 
 router.get("/:idForum/unterforen", function getUnterforen(req, res, next) {
     const { idForum } = req.params
-    listChildForums(idForum)
+    const { limit, offset } = req.query
+
+    listChildForums(idForum, limit, offset)
         .then((result) => {
             return res.status(200).json(result)
         })
@@ -28,7 +30,9 @@ router.get("/:idForum/unterforen", function getUnterforen(req, res, next) {
 
 router.get("/:idForum/foreneintraege", function getForeneintraegeByForumId(req, res, next) {
     const { idForum } = req.params
-    listForeneintraege({ idForum })
+    const { limit, offset } = req.query
+
+    listForeneintraegeForForum(idForum, limit, offset)
         .then((result) => {
             return res.status(200).json(result)
         })
