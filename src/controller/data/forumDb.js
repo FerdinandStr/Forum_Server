@@ -66,5 +66,9 @@ export default function makeForumDb() {
             .then((result) => (result.rows[0] ? result.rows[0] : false))
     }
 
-    return { insertForum, getForumListByParentId, deleteForum, getForumParents }
+    function countChildForums(idForum) {
+        return dbConnection("forum").count("*").where("id_parent_forum", idForum)
+    }
+
+    return { insertForum, getForumListByParentId, deleteForum, getForumParents, countChildForums }
 }

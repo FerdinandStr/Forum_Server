@@ -1,4 +1,5 @@
 import { Router } from "express"
+import countBeitraegeByQuery from "../../use-cases/beitrag/countBeitraege"
 import createBeitrag from "../../use-cases/beitrag/createBeitrag"
 import deleteBeitrag from "../../use-cases/beitrag/deleteBeitrag"
 import listBeitrag from "../../use-cases/beitrag/listBeitrag"
@@ -9,6 +10,15 @@ const router = Router()
 router.get("/", function getBeitraegeByQuery(req, res, next) {
     const { idBeitrag, idForum, idForeneintrag, ersteller } = req.query
     listBeitrag({ idBeitrag, idForum, idForeneintrag, ersteller })
+        .then((result) => {
+            return res.status(200).json(result)
+        })
+        .catch(next)
+})
+
+router.get("/count", function getCountBeitraegeByQuery(req, res, next) {
+    const { idForum, idForeneintrag, ersteller } = req.query
+    countBeitraegeByQuery({ idForum, idForeneintrag, ersteller })
         .then((result) => {
             return res.status(200).json(result)
         })

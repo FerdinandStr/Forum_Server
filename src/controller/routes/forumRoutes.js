@@ -2,15 +2,17 @@ import { Router } from "express"
 import createForum from "../../use-cases/forum/createForum"
 import deleteForum from "../../use-cases/forum/deleteForum"
 import getForumParents from "../../use-cases/forum/getForumParents"
-import listChildForums from "../../use-cases/forum/listChildForums"
-import listForeneintraegeForForum from "../../use-cases/forum/listForeneitraegeForForum"
+import listForeneintraegeForForum from "../../use-cases/foreneintrag/listForeneitraegeInForum"
 import { verifyToken } from "./benutzerRoutes"
+import countForeneintraegeInForum from "../../use-cases/foreneintrag/countForeneintraegeInForum"
+import listChildForen from "../../use-cases/forum/listChildForen"
+import countChildForen from "../../use-cases/forum/countChildForen"
 
 const router = Router()
 
 router.get("/", function getForumsByQuery(req, res, next) {
     const { idParentForum } = req.query //hier erweitern oder route löschen
-    listChildForums(idParentForum)
+    listChildForen(idParentForum)
         .then((result) => {
             return res.status(200).json(result)
         })
@@ -21,7 +23,7 @@ router.get("/:idForum/unterforen", function getUnterforen(req, res, next) {
     const { idForum } = req.params
     const { limit, offset } = req.query
 
-    listChildForums(idForum, limit, offset)
+    listChildForen(idForum, limit, offset)
         .then((result) => {
             return res.status(200).json(result)
         })
@@ -44,6 +46,26 @@ router.get("/:idForum/forumParents", function getForumParentPath(req, res, next)
     getForumParents(idForum)
         .then((data) => {
             res.json(data)
+        })
+        .catch(next)
+})
+
+router.get("/:idForum/unterforen/count", function getCountUnterforen(req, res, next) {
+    const { idForum } = req.params
+
+    countChildForen(idForum)
+        .then((result) => {
+            return res.status(200).json(result)
+        })
+        .catch(next)
+})
+
+router.get("/:idForum/foreneintraege/count", function getCountForeneintraegeInForum(req, res, next) {
+    const { idForum } = req.params
+
+    countForeneintraegeInForum(idForum)
+        .then((result) => {
+            return res.status(200).json(result)
         })
         .catch(next)
 })

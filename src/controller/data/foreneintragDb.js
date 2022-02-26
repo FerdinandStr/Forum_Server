@@ -45,7 +45,7 @@ export default function makeForeneintragDb() {
             .update({ ...foreneintragRow, updated_at: new Date() })
     }
 
-    function getForeneintragListForForum(idForum, limit, offset) {
+    function selectForeneintragListInForum(idForum, limit, offset) {
         const limitParam = limit ? limit : null
         const offsetParam = offset ? offset : null
 
@@ -109,5 +109,16 @@ export default function makeForeneintragDb() {
         return dbConnection("foreneintrag").where("id_foreneintrag", idForeneintrag).del()
     }
 
-    return { insertForeneintrag, updateForeneintrag, getForeneintragListForForum, getForeneintragList, deleteForeneintrag }
+    function countForeneintraegeInForum(idForum) {
+        return dbConnection("foreneintrag").count("*").where("id_forum", idForum)
+    }
+
+    return {
+        insertForeneintrag,
+        updateForeneintrag,
+        selectForeneintragListInForum,
+        getForeneintragList,
+        deleteForeneintrag,
+        countForeneintraegeInForum,
+    }
 }

@@ -1,7 +1,7 @@
 import { Router } from "express"
 import createForeneintrag from "../../use-cases/foreneintrag/createForeneintrag"
 import deleteForeneintrag from "../../use-cases/foreneintrag/deleteForeneintrag"
-import listBeitraegeForForeneintrag from "../../use-cases/foreneintrag/listBeitraegeForForeneintrag"
+import listBeitraegeForForeneintrag from "../../use-cases/beitrag/listBeitraegeForForeneintrag"
 import listForeneintraege from "../../use-cases/foreneintrag/listForeneintrag"
 import updateForeneintrag from "../../use-cases/foreneintrag/updateForeneintrag"
 import { verifyToken } from "./benutzerRoutes"

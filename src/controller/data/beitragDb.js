@@ -72,7 +72,6 @@ export default function makeBeitragDb() {
             .leftJoin("studiengang", "studiengang.id_studiengang", "=", "benutzer.id_studiengang")
             .orderBy("beitrag.id_beitrag")
             .then((beitragList) => {
-                console.log("BeitragList", beitragList)
                 return beitragList.map((dataRow) => ({
                     ...convertBeitragRowToEntity(dataRow),
                     ...setupErstellerInfo(dataRow),
@@ -84,5 +83,19 @@ export default function makeBeitragDb() {
         return dbConnection("beitrag").where("id_beitrag", idBeitrag).del()
     }
 
-    return { insertBeitrag, getBeitragList, getBeitragListForForeneintrag, deleteBeitrag }
+    function countBeitraege(idForum, idForeneintrag, ersteller) {
+        const query = dbConnection("beitrag").count("*")
+        if (idForum) {
+            query.where("id_forum", idForum)
+        }
+        if (idForeneintrag) {
+            query.where("id_foreneintrag", idForeneintrag)
+        }
+        if (ersteller) {
+            query.where("ersteller", ersteller)
+        }
+        return query
+    }
+
+    return { insertBeitrag, getBeitragList, getBeitragListForForeneintrag, deleteBeitrag, countBeitraege }
 }

@@ -386,6 +386,72 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "count Unterforen",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/foren/2/unterforen",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"foren",
+								"2",
+								"unterforen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "count Foreneinträge in Forum",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/foren/2/unterforen",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"foren",
+								"2",
+								"unterforen"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -664,6 +730,55 @@
 							"path": [
 								"beitraege",
 								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "count Beitrag by Query",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/beitraege?idBeitrag=&idForum=&idForeneintrag=3&ersteller=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"beitraege"
+							],
+							"query": [
+								{
+									"key": "idBeitrag",
+									"value": ""
+								},
+								{
+									"key": "idForum",
+									"value": ""
+								},
+								{
+									"key": "idForeneintrag",
+									"value": "3"
+								},
+								{
+									"key": "ersteller",
+									"value": ""
+								}
 							]
 						}
 					},
