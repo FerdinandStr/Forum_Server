@@ -3,7 +3,9 @@
 //npx knex  --knexfile .\src\config\knex\knexfile.js --env postgresql migrate:latest
 //npx knex  --knexfile .\src\config\knex\knexfile.js --env postgresql seed:make 00_forum_data
 //npx knex  --knexfile .\src\config\knex\knexfile.js --env postgresql seed:run
+require("dotenv").config({ path: "../../../.env" })
 const { DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASS } = process.env
+
 module.exports = {
     postgresql: {
         client: "postgresql",

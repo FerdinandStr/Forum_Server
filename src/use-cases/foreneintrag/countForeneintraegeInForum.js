@@ -6,6 +6,5 @@ export default async function countForeneintraegeInForum(idForum) {
     if (count.length) {
         return count[0].count
     }
-    console.log(count)
     throw new Error("Unexpected error: count failed")
 }
