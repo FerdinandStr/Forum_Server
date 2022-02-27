@@ -27,6 +27,7 @@ exports.seed = async function (knex) {
       id_forum: idpartyforum,
       name: "Fr. 25.02",
       ersteller: 1,
+      id_kategorie: 3,
     })
     .returning("id_foreneintrag")
     .then((id) => id[0])
@@ -53,6 +54,7 @@ exports.seed = async function (knex) {
       id_forum: idpartyforum,
       name: "Sa. 26.02",
       ersteller: 1,
+      id_kategorie: 3,
     })
     .returning("id_foreneintrag")
     .then((id) => id[0])

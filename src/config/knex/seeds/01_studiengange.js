@@ -38,6 +38,7 @@ exports.seed = async function (knex) {
       id_forum: idinformatik,
       name: "Vorlesungsplan",
       ersteller: 1,
+      id_kategorie: 1,
     })
     .returning("id_foreneintrag")
     .then((id) => id[0])
@@ -64,6 +65,7 @@ exports.seed = async function (knex) {
       id_forum: idinformatik,
       name: "Volkswirtschaftslehre",
       ersteller: 1,
+      id_kategorie: 3,
     })
     .returning("id_foreneintrag")
     .then((id) => id[0])
@@ -90,6 +92,7 @@ exports.seed = async function (knex) {
       id_forum: idinformatik,
       name: "Klausurfragen",
       ersteller: 1,
+      id_kategorie: 4,
     })
     .returning("id_foreneintrag")
     .then((id) => id[0])
@@ -129,6 +132,7 @@ exports.seed = async function (knex) {
       id_forum: idWirtschaftsinformatik,
       name: "Vorlesungsplan",
       ersteller: 1,
+      id_kategorie: 1,
     })
     .returning("id_foreneintrag")
     .then((id) => id[0])
@@ -155,6 +159,7 @@ exports.seed = async function (knex) {
       id_forum: idWirtschaftsinformatik,
       name: "Volkswirtschaftslehre",
       ersteller: 1,
+      id_kategorie: 3,
     })
     .returning("id_foreneintrag")
     .then((id) => id[0])
@@ -181,6 +186,7 @@ exports.seed = async function (knex) {
       id_forum: idWirtschaftsinformatik,
       name: "Klausurfragen",
       ersteller: 1,
+      id_kategorie: 4,
     })
     .returning("id_foreneintrag")
     .then((id) => id[0])
@@ -222,6 +228,7 @@ exports.seed = async function (knex) {
       id_forum: idBWL,
       name: "Vorlesungsplan",
       ersteller: 1,
+      id_kategorie: 1,
     })
     .returning("id_foreneintrag")
     .then((id) => id[0])
@@ -248,6 +255,7 @@ exports.seed = async function (knex) {
       id_forum: idBWL,
       name: "Volkswirtschaftslehre",
       ersteller: 1,
+      id_kategorie: 3,
     })
     .returning("id_foreneintrag")
     .then((id) => id[0])
@@ -274,6 +282,7 @@ exports.seed = async function (knex) {
       id_forum: idBWL,
       name: "Klausurfragen",
       ersteller: 1,
+      id_kategorie: 4,
     })
     .returning("id_foreneintrag")
     .then((id) => id[0])
@@ -317,6 +326,7 @@ exports.seed = async function (knex) {
       id_forum: idMaschinenbau,
       name: "Vorlesungsplan",
       ersteller: 1,
+      id_kategorie: 1,
     })
     .returning("id_foreneintrag")
     .then((id) => id[0])
@@ -343,6 +353,7 @@ exports.seed = async function (knex) {
       id_forum: idMaschinenbau,
       name: "Volkswirtschaftslehre",
       ersteller: 1,
+      id_kategorie: 3,
     })
     .returning("id_foreneintrag")
     .then((id) => id[0])
@@ -369,6 +380,7 @@ exports.seed = async function (knex) {
       id_forum: idMaschinenbau,
       name: "Klausurfragen",
       ersteller: 1,
+      id_kategorie: 4,
     })
     .returning("id_foreneintrag")
     .then((id) => id[0])
