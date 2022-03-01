@@ -308,15 +308,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/foren/2/unterforen",
-							"protocol": "http",
+							"raw": "{{protocol}}://{{host}}:{{port}}/foren/1/unterforen",
+							"protocol": "{{protocol}}",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "3000",
+							"port": "{{port}}",
 							"path": [
 								"foren",
-								"2",
+								"1",
 								"unterforen"
 							]
 						}

@@ -1,7 +1,7 @@
 import { Router } from "express"
 import createForum from "../../use-cases/forum/createForum"
 import deleteForum from "../../use-cases/forum/deleteForum"
-import getForumParents from "../../use-cases/forum/getForumParents"
+import getForumParentPath from "../../use-cases/forum/getForumParentPath"
 import listForeneintraegeForForum from "../../use-cases/foreneintrag/listForeneitraegeInForum"
 import { verifyToken } from "./benutzerRoutes"
 import countForeneintraegeInForum from "../../use-cases/foreneintrag/countForeneintraegeInForum"
@@ -41,9 +41,9 @@ router.get("/:idForum/foreneintraege", function getForeneintraegeByForumId(req, 
         .catch(next)
 })
 
-router.get("/:idForum/forumParents", function getForumParentPath(req, res, next) {
+router.get("/:idForum/forumParents", function getForumParentPathRoute(req, res, next) {
     const { idForum } = req.params
-    getForumParents(idForum)
+    getForumParentPath(idForum)
         .then((data) => {
             res.json(data)
         })

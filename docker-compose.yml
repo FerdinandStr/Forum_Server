@@ -1,0 +1,26 @@
+version: "3.1"
+services:
+    web:
+        build: .
+        ports:
+            - "3000:3000"
+        env_file:
+            - .env
+        environment:
+            DB_HOST: "postgres_forum" #interal docker network host (same 172.17.0.1)
+
+    postgres:
+        hostname: postgres
+        container_name: postgres_forum
+        image: postgres
+        restart: always
+        ports:
+            - "5432:5432"
+        env_file:
+            - .env_postgres
+        volumes:
+            - type: volume
+              source: postgres-data
+              target: /var/lib/postgresql/data
+volumes:
+    postgres-data:

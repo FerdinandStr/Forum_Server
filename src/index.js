@@ -11,11 +11,11 @@ import studiengangRoutes from "./controller/routes/studiengangRoutes"
 import rolleRoutes from "./controller/routes/rolleRoutes"
 import benutzerRoutes from "./controller/routes/benutzerRoutes"
 
-const { port } = process.env
+const { PORT } = process.env
 
 const server = express()
-server.listen(port, () => {
-    console.log("test server listening on ", port)
+server.listen(PORT, () => {
+    console.log("Forum server listening on ", PORT)
 })
 //Middlewares
 server.use(cors({ allowedHeaders: "Content-Type", credentials: true, origin: true }))
