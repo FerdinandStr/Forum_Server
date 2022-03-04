@@ -66,12 +66,13 @@ export default function makeBeitragDb() {
 
     function getBeitragListForForeneintrag(idForeneintrag, limit, offset) {
         return dbConnection
-            .select("*", "studiengang.name as studiengang_name")
+            .select("*", "studiengang.name as studiengang_name", "beitrag.created_at as created_at", "beitrag.updated_at as updated_at")
             .from({ beitrag: dbConnection("beitrag").where("beitrag.id_foreneintrag", idForeneintrag).limit(limit).offset(offset) })
             .join("benutzer", "benutzer.id_benutzer", "=", "beitrag.ersteller")
             .leftJoin("studiengang", "studiengang.id_studiengang", "=", "benutzer.id_studiengang")
             .orderBy("beitrag.id_beitrag")
             .then((beitragList) => {
+                console.log("beitragList", beitragList)
                 return beitragList.map((dataRow) => ({
                     ...convertBeitragRowToEntity(dataRow),
                     ...setupErstellerInfo(dataRow),
