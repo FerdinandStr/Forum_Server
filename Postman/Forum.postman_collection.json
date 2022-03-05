@@ -44,7 +44,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"a@b.cc\",\r\n    \"password\": \"abc\"\r\n}",
+							"raw": "{\r\n    \"email\": \"test@test4.de\",\r\n    \"password\": \"test\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -52,12 +52,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/benutzer/login",
-							"protocol": "http",
+							"raw": "{{protocol}}://{{host}}:{{port}}/benutzer/login",
+							"protocol": "{{protocol}}",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "3000",
+							"port": "{{port}}",
 							"path": [
 								"benutzer",
 								"login"
@@ -109,7 +109,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idStudiengang\": null,\r\n    \"vorname\": \"a@b.cc\",\r\n    \"nachname\": \"pass abc\",\r\n    \"passwort\": \"abc\",\r\n    \"email\": \"a@b.cc\"\r\n}",
+							"raw": "{\r\n    \"idStudiengang\": null,\r\n    \"vorname\": \"test\",\r\n    \"nachname\": \"test\",\r\n    \"passwort\": \"test\",\r\n    \"email\": \"test@test4.de\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -117,12 +117,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/benutzer/register",
-							"protocol": "http",
+							"raw": "{{protocol}}://{{host}}:{{port}}/benutzer/register",
+							"protocol": "{{protocol}}",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "3000",
+							"port": "{{port}}",
 							"path": [
 								"benutzer",
 								"register"
@@ -203,7 +203,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Ultra deep\",\r\n    \"idParentForum\": 13\r\n}",
+							"raw": "{\r\n    \"name\": \"Ganz viele weitere9\",\r\n    \"idParentForum\": 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -225,7 +225,7 @@
 					"response": []
 				},
 				{
-					"name": "get Foren by ParentId",
+					"name": "get Foren by Query",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -242,19 +242,31 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/foren?idParentForum=10",
-							"protocol": "http",
+							"raw": "{{protocol}}://{{host}}:{{port}}/foren?idForum=&idParentForum=&name=Tiefer&ersteller=",
+							"protocol": "{{protocol}}",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "3000",
+							"port": "{{port}}",
 							"path": [
 								"foren"
 							],
 							"query": [
 								{
+									"key": "idForum",
+									"value": ""
+								},
+								{
 									"key": "idParentForum",
-									"value": "10"
+									"value": ""
+								},
+								{
+									"key": "name",
+									"value": "Tiefer"
+								},
+								{
+									"key": "ersteller",
+									"value": ""
 								}
 							]
 						}
@@ -308,7 +320,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/foren/1/unterforen",
+							"raw": "{{protocol}}://{{host}}:{{port}}/foren/10/unterforen?limit=&offset=",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
@@ -316,72 +328,18 @@
 							"port": "{{port}}",
 							"path": [
 								"foren",
-								"1",
+								"10",
 								"unterforen"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get Foreneinträge in Forum",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/foren/3/foreneintraege?limit=1&offset=0",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"foren",
-								"3",
-								"foreneintraege"
 							],
 							"query": [
 								{
 									"key": "limit",
-									"value": "1"
+									"value": ""
 								},
 								{
 									"key": "offset",
-									"value": "0"
+									"value": ""
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get Forum Parent Path",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/foren/3/forumParents",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"foren",
-								"3",
-								"forumParents"
 							]
 						}
 					},
@@ -405,7 +363,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/foren/2/unterforen",
+							"raw": "http://localhost:3000/foren/10/unterforen/count",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -413,8 +371,52 @@
 							"port": "3000",
 							"path": [
 								"foren",
-								"2",
-								"unterforen"
+								"10",
+								"unterforen",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Foreneinträge in Forum",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/foren/4/foreneintraege?limit=&offset=",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"foren",
+								"4",
+								"foreneintraege"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": ""
+								},
+								{
+									"key": "offset",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -438,7 +440,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/foren/2/unterforen",
+							"raw": "http://localhost:3000/foren/3/foreneintraege/count",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -446,8 +448,30 @@
 							"port": "3000",
 							"path": [
 								"foren",
-								"2",
-								"unterforen"
+								"3",
+								"foreneintraege",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Forum Parent Path",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/foren/3/forumParents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"foren",
+								"3",
+								"forumParents"
 							]
 						}
 					},
@@ -566,25 +590,25 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/foreneintraege/29/beitraege?limit=10&offset=0",
-							"protocol": "http",
+							"raw": "{{protocol}}://{{host}}:{{port}}/foreneintraege/7/beitraege?limit=&offset=",
+							"protocol": "{{protocol}}",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "3000",
+							"port": "{{port}}",
 							"path": [
 								"foreneintraege",
-								"29",
+								"7",
 								"beitraege"
 							],
 							"query": [
 								{
 									"key": "limit",
-									"value": "10"
+									"value": ""
 								},
 								{
 									"key": "offset",
-									"value": "0"
+									"value": ""
 								}
 							]
 						}
@@ -736,7 +760,7 @@
 					"response": []
 				},
 				{
-					"name": "count Beitrag by Query",
+					"name": "count Beitraege by Query",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -753,27 +777,24 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/beitraege?idBeitrag=&idForum=&idForeneintrag=3&ersteller=",
-							"protocol": "http",
+							"raw": "{{protocol}}://{{host}}:{{port}}/beitraege/count?idForum=&idForeneintrag=29&ersteller=",
+							"protocol": "{{protocol}}",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "3000",
+							"port": "{{port}}",
 							"path": [
-								"beitraege"
+								"beitraege",
+								"count"
 							],
 							"query": [
-								{
-									"key": "idBeitrag",
-									"value": ""
-								},
 								{
 									"key": "idForum",
 									"value": ""
 								},
 								{
 									"key": "idForeneintrag",
-									"value": "3"
+									"value": "29"
 								},
 								{
 									"key": "ersteller",

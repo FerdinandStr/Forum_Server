@@ -32,6 +32,23 @@ export default function makeForumDb() {
             .then((id) => id[0])
     }
 
+    function selectForumListByQuery({ idForum, idParentForum, name, ersteller }) {
+        const query = dbConnection("forum")
+        if (idForum) {
+            query.where("id_forum", idForum)
+        }
+        if (idParentForum) {
+            query.where("id_parent_forum", idParentForum)
+        }
+        if (name) {
+            query.where("name", name)
+        }
+        if (ersteller) {
+            query.where("ersteller", ersteller)
+        }
+        return query.then((forumList) => forumList.map((forumRow) => convertForumRowToEntity(forumRow)))
+    }
+
     //Get ForumList by ParentId
     function getForumListByParentId(idForum, limit, offset) {
         return dbConnection("forum")
@@ -70,5 +87,5 @@ export default function makeForumDb() {
         return dbConnection("forum").count("*").where("id_parent_forum", idForum)
     }
 
-    return { insertForum, getForumListByParentId, deleteForum, getForumParents, countChildForums }
+    return { insertForum, selectForumListByQuery, getForumListByParentId, deleteForum, getForumParents, countChildForums }
 }

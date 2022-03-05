@@ -4,6 +4,13 @@ const forumDb = makeForumDb()
 
 export default async function createForum(forum) {
     const forumEntity = makeForum(forum)
+
+    //check if Subforum with same name in same forum exists already
+    const alreadyExists = await forumDb.selectForumListByQuery({ idParentForum: forumEntity.idParentForum, name: forumEntity.name })
+    if (alreadyExists.length > 0) {
+        throw new Error("Ein Unterforum mit dem selben Namen existiert in diesem Forum bereits!")
+    }
+
     const idForum = await forumDb.insertForum(forumEntity)
     if (idForum) {
         return idForum

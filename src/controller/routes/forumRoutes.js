@@ -7,12 +7,13 @@ import { verifyToken } from "./benutzerRoutes"
 import countForeneintraegeInForum from "../../use-cases/foreneintrag/countForeneintraegeInForum"
 import listChildForen from "../../use-cases/forum/listChildForen"
 import countChildForen from "../../use-cases/forum/countChildForen"
+import getForenByQuery from "../../use-cases/forum/getForenByQuery"
 
 const router = Router()
 
 router.get("/", function getForumsByQuery(req, res, next) {
-    const { idParentForum } = req.query //hier erweitern oder route löschen
-    listChildForen(idParentForum)
+    const { idForum, idParentForum, name, ersteller } = req.query
+    getForenByQuery({ idForum, idParentForum, name, ersteller })
         .then((result) => {
             return res.status(200).json(result)
         })
