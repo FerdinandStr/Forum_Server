@@ -1,10 +1,10 @@
 import { Router } from "express"
-import createForeneintrag from "../../use-cases/foreneintrag/createForeneintrag"
 import deleteForeneintrag from "../../use-cases/foreneintrag/deleteForeneintrag"
 import listBeitraegeForForeneintrag from "../../use-cases/beitrag/listBeitraegeForForeneintrag"
 import listForeneintraege from "../../use-cases/foreneintrag/listForeneintrag"
 import updateForeneintrag from "../../use-cases/foreneintrag/updateForeneintrag"
 import { verifyToken } from "./benutzerRoutes"
+import createForeneintragWithBeitrag from "../../use-cases/foreneintrag/createForeneintragWithBeitrag"
 
 const router = Router()
 
@@ -33,13 +33,13 @@ router.use("/", verifyToken)
 // ######################## ALL ROUTES BELOW ARE SECURED ######################## //
 
 router.post("/", function postForeneintrag(req, res, next) {
-    const { idForum, name, idKategorie } = req.body
+    const { idForum, name, idKategorie, beitragInhalt } = req.body
     const ersteller = req.benutzer.idBenutzer
 
-    createForeneintrag({ idForum, name, idKategorie, ersteller })
-        .then((idForeneintrag) => {
-            console.log("foreneintrag commited", idForeneintrag)
-            return res.status(201).json({ idForeneintrag })
+    createForeneintragWithBeitrag({ idForum, name, idKategorie, ersteller }, beitragInhalt)
+        .then((result) => {
+            console.log("foreneintrag return", result)
+            return res.status(201).json(result)
         })
         .catch(next)
 })

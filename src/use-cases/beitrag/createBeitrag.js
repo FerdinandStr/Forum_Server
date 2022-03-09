@@ -3,9 +3,9 @@ import makeBeitrag from "../../entities/beitrag"
 
 const beitragDb = makeBeitragDb()
 
-export default async function createBeitrag(beitrag) {
+export default async function createBeitrag(beitrag, trx) {
     const beitragEntity = makeBeitrag(beitrag)
-    const idBeitrag = await beitragDb.insertBeitrag(beitragEntity)
+    const idBeitrag = await beitragDb.insertBeitrag(beitragEntity, trx)
     if (idBeitrag) {
         return idBeitrag
     }

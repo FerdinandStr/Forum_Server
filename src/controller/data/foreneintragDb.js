@@ -26,10 +26,10 @@ function convertEntityToForeneintragRow(foreneintragEntity) {
 
 export default function makeForeneintragDb() {
     //Insert new Foreneintrag
-    function insertForeneintrag(foreneintrag) {
+    function insertForeneintrag(foreneintrag, trx) {
+        const db = trx || dbConnection
         const foreneintragRow = convertEntityToForeneintragRow(foreneintrag)
-        console.log("Insert Foreneintrag", foreneintragRow)
-        return dbConnection
+        return db
             .insert(foreneintragRow)
             .into("foreneintrag")
             .returning("id_foreneintrag")
@@ -50,37 +50,53 @@ export default function makeForeneintragDb() {
         const offsetParam = offset ? offset : null
 
         const query = dbConnection.raw(
+            // @formatter:off
+            // prettier-ignore
             "select i.*, " +
-                "b2.id_benutzer, " +
-                "b2.id_studiengang, " +
-                "b2.vorname, " +
-                "b2.nachname, " +
-                "b2.bild_pfad, " +
+                "lbe.id_studiengang, " +
+                "lbe.vorname, " +
+                "lbe.nachname, " +
+                "lbe.bild_pfad, " +
                 "s.kuerzel, " +
-                "s.name as studiengang_name " +
-                "from ( " +
-                "select max(b.id_beitrag) as last_beitrag, " +
-                "count(b.*) as count_beitrag, " +
-                "fe.* " +
-                "from foreneintrag fe " +
-                "inner join beitrag b on fe.id_foreneintrag = b.id_foreneintrag " +
-                "group by fe.id_foreneintrag " +
+                "s.name as studiengang_name, " +
+                "k.name as kategorie_name " +
+            "from ( " +
+                    "select max.last_beitrag, " +
+                            "max.count_beitrag, " +
+                            "b.ersteller  as last_beitrag_id_ersteller, " +
+                            "b.created_at as last_beitrag_created_at, " +
+                            "b.updated_at as last_beitrag_updated_at, " +
+                            "fe.id_foreneintrag, " +
+                            "fe.id_forum, " +
+                            "fe.id_kategorie, " +
+                            "fe.name " +
+                    "from foreneintrag fe " +
+                            "inner join (select max(b.id_beitrag) as last_beitrag, " +
+                                                "count(b.*)        as count_beitrag, " +
+                                                "b.id_foreneintrag " +
+                                        "from beitrag b " +
+                                        "group by b.id_foreneintrag) max on fe.id_foreneintrag = max.id_foreneintrag " +
+                            "inner join beitrag b on max.last_beitrag = b.id_beitrag " +
                 ") as i " +
-                "inner join benutzer b2 on i.ersteller = b2.id_benutzer " +
-                "left join studiengang s on b2.id_studiengang = s.id_studiengang " +
-                "where i.id_forum = ? " +
-                "order by i.last_beitrag desc " +
-                "limit ? " +
-                "offset ? ",
+                    "inner join benutzer lbe on i.last_beitrag_id_ersteller = lbe.id_benutzer " +
+                    "left join studiengang s on lbe.id_studiengang = s.id_studiengang " +
+                    "left join kategorie k on i.id_kategorie = k.id_kategorie " +
+            "where i.id_forum = ? " +
+            "order by i.last_beitrag desc " + 
+            "limit ? offset ? ",
             [idForum, limitParam, offsetParam]
         )
 
         return query.then((result) =>
             result.rows.map((row) => ({
                 ...convertForeneintragRowToEntity(row),
-                ...setupErstellerInfo(row),
+                lastBeitrag: {
+                    idBeitrag: row.last_beitrag,
+                    createdAt: row.last_beitrag_created_at,
+                    updatedAt: row.last_beitrag_updated_at,
+                    ...setupErstellerInfo({ ...row, ersteller: row.last_beitrag_id_ersteller }),
+                },
                 kategorieName: row.kategorie_name,
-                lastBeitrag: row.last_beitrag,
                 countBeitrag: row.count_beitrag,
             }))
         )
@@ -100,7 +116,9 @@ export default function makeForeneintragDb() {
         if (name) {
             query.where("name", name)
         }
-        query.limit(limit).offset(offset)
+        if (limit || offset) {
+            query.limit(limit).offset(offset)
+        }
 
         return query.then((foreneintragList) => foreneintragList.map((row) => convertForeneintragRowToEntity(row)))
     }

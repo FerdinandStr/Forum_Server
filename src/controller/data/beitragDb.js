@@ -37,10 +37,10 @@ export function setupErstellerInfo(dataRow) {
 
 export default function makeBeitragDb() {
     //Insert new Beitrag
-    function insertBeitrag(beitrag) {
+    function insertBeitrag(beitrag, trx) {
+        const db = trx || dbConnection
         const beitragRow = convertEntityToBeitragRow(beitrag)
-        console.log("ROW", beitragRow)
-        return dbConnection
+        return db
             .insert(beitragRow)
             .into("beitrag")
             .returning("id_beitrag")
