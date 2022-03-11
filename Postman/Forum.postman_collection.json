@@ -242,7 +242,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/foren?idForum=&idParentForum=&name=Tiefer&ersteller=",
+							"raw": "{{protocol}}://{{host}}:{{port}}/foren?idForum=&idParentForum=&name=&ersteller=1",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
@@ -262,11 +262,11 @@
 								},
 								{
 									"key": "name",
-									"value": "Tiefer"
+									"value": ""
 								},
 								{
 									"key": "ersteller",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
@@ -397,7 +397,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/foren/4/foreneintraege?limit=&offset=",
+							"raw": "{{protocol}}://{{host}}:{{port}}/foren/10/foreneintraege?limit=10&offset=0",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
@@ -405,17 +405,17 @@
 							"port": "{{port}}",
 							"path": [
 								"foren",
-								"4",
+								"10",
 								"foreneintraege"
 							],
 							"query": [
 								{
 									"key": "limit",
-									"value": ""
+									"value": "10"
 								},
 								{
 									"key": "offset",
-									"value": ""
+									"value": "0"
 								}
 							]
 						}
@@ -440,7 +440,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/foren/3/foreneintraege/count",
+							"raw": "http://localhost:3000/foren/10/foreneintraege/count",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -448,7 +448,7 @@
 							"port": "3000",
 							"path": [
 								"foren",
-								"3",
+								"10",
 								"foreneintraege",
 								"count"
 							]
@@ -462,12 +462,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/foren/3/forumParents",
-							"protocol": "http",
+							"raw": "{{protocol}}://{{host}}:{{port}}/foren/3/forumParents",
+							"protocol": "{{protocol}}",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "3000",
+							"port": "{{port}}",
 							"path": [
 								"foren",
 								"3",
@@ -489,7 +489,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idForum\": 10,\r\n    \"name\": \"Fast Leer\",\r\n    \"idKategorie\": 2\r\n}",
+							"raw": "{\r\n    \"idForum\": 10,\r\n    \"name\": \"Neuu28\",\r\n    \"idKategorie\": 1,\r\n    \"beitragInhalt\": \"Kein leerer Inhalt\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -528,19 +528,19 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/foreneintraege?idForum=1&idKategorie=&idForeneintrag=",
-							"protocol": "http",
+							"raw": "{{protocol}}://{{host}}:{{port}}/foreneintraege?idForum=&idKategorie=&idForeneintrag=&name=Neuu12",
+							"protocol": "{{protocol}}",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "3000",
+							"port": "{{port}}",
 							"path": [
 								"foreneintraege"
 							],
 							"query": [
 								{
 									"key": "idForum",
-									"value": "1"
+									"value": ""
 								},
 								{
 									"key": "idKategorie",
@@ -549,6 +549,10 @@
 								{
 									"key": "idForeneintrag",
 									"value": ""
+								},
+								{
+									"key": "name",
+									"value": "Neuu12"
 								}
 							]
 						}
@@ -817,7 +821,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idKategorie\": 3,\r\n    \"name\": \"Frage\"\r\n}",
+							"raw": "{\r\n    \"idKategorie\": 1,\r\n    \"name\": \"Frage\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
