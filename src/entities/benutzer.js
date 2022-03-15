@@ -1,8 +1,8 @@
 import bcrypt from "bcrypt"
 import validator from "validator"
 
-function isValidPassword(password) {
-    return password && password.length < 8 && password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*d)[a-zA-Zd]{8,}$/)
+function isValidPassword(passwort) {
+    return passwort && passwort.length < 8 && passwort.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*d)[a-zA-Zd]{8,}$/)
 }
 
 export default async function makeBenutzer(benutzer) {

@@ -23,9 +23,9 @@ router.post("/register", function postBenutzer(req, res, next) {
 
 //* login User
 router.post("/login", (req, res, next) => {
-    const { email, password } = req.body
+    const { email, passwort } = req.body
 
-    loginBenutzer(email, password)
+    loginBenutzer(email, passwort)
         .then((idBenutzer) => {
             const token = createToken({ idBenutzer: idBenutzer })
             addToken(res, token)
