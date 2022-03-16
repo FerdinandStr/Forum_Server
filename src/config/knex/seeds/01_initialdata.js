@@ -3,7 +3,7 @@ exports.seed = async function (knex) {
     await knex("benutzer").insert({
         id_benutzer: 1,
         vorname: "SYSTEM",
-        nachname: "SYSTEM",
+        nachname: "",
         email: "SYSTEM",
         passwort: "",
         bild_pfad: "",
