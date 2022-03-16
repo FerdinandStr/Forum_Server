@@ -1,5 +1,4 @@
 exports.seed = async function (knex) {
-
     await knex("rolle").insert({
         id_rolle: 1,
         name: "Administrator",
@@ -29,4 +28,4 @@ exports.seed = async function (knex) {
 
     console.log("04_rollen added")
     return true
-};
+}
