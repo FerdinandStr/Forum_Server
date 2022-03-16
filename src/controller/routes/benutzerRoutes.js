@@ -1,7 +1,7 @@
 import { Router } from "express"
 import { checkToken, createToken, LOGIN_DURATION } from "../../config/express/middleware/auth"
 import createBenutzer from "../../use-cases/benutzer/createBenutzer"
-import deleteBenutzer from "../../use-cases/benutzer/deleteBenutzer"
+import deactivateBenutzer from "../../use-cases/benutzer/deactivateBenutzer"
 import getBenutzer from "../../use-cases/benutzer/getBenutzer"
 import listBenutzer from "../../use-cases/benutzer/listBenutzer"
 import loginBenutzer from "../../use-cases/benutzer/loginBenutzer"
@@ -64,11 +64,15 @@ router.get("/:idBenutzer", function getUsersById(req, res, next) {
 // delete User by Id
 router.delete("/:idBenutzer", (req, res, next) => {
     const idBenutzer = req.params.idBenutzer
-    deleteBenutzer(idBenutzer)
+    deactivateBenutzer(idBenutzer).then(() => {
+        return res.status(200).send()
+    }).catch(next)
+
+    /*deleteBenutzer(idBenutzer)
         .then(() => {
             return res.status(200).send()
         })
-        .catch(next)
+        .catch(next)*/
 })
 
 //This will check if a cookie is provided and tell the JS application that the cookie is valid and the user is login in "automatically"

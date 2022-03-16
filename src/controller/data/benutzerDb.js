@@ -54,8 +54,13 @@ export default function makeBenutzerDb() {
     function getBenutzerForLogin(email) {
         return dbConnection("benutzer")
             .where("email", email)
+            .where("status_aktiv", 1)
             .then((benutzerList) => (benutzerList[0] ? { idBenutzer: benutzerList[0].id_benutzer, passwort: benutzerList[0].passwort } : null))
     }
 
-    return { insertBenutzer, getBenutzerList, getBenutzerById, deleteBenutzerById, getBenutzerForLogin }
+    function deactivateBenutzerById(idBenutzer) {
+        return dbConnection("benutzer").update({ vorname: 'Gelöschter', nachname: 'Benutzer', email: '', status_aktiv: 0 }).where("id_benutzer", idBenutzer)
+    }
+
+    return { insertBenutzer, getBenutzerList, getBenutzerById, deleteBenutzerById, getBenutzerForLogin, deactivateBenutzerById }
 }
