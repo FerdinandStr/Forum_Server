@@ -6,7 +6,7 @@ export default async function deactivateBenutzer(idBenutzer) {
     if (idBenutzer) {
         const result = await benutzerDb.deactivateBenutzerById(idBenutzer)
         if (result === 1) {
-            console.log("User " + idBenutzer + " deactivation successfully; res=", result)
+            console.log("User " + idBenutzer + " deactivation successfull; res=", result)
             return true
         }
         throw new NotFoundError("User with id " + idBenutzer + " not found; result=" + result)
